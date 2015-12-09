@@ -1,0 +1,10 @@
+\documentclass{article}
+
+\begin{document}
+
+\begin{itemize}
+\item R Programming
+\end {itemize}
+
+
+\end{document}

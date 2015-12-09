@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{R Programming}
+\author{Martín Macías}
+\date{Diciembre de 2015}
+
+\begin{document}
+
+\maketitle
+
+\section{Estableciendo el Directorio de trabajo}
+La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el directorio de trabajo.\\
+\begin{itemize}
+  \item Con la opción \texttt{getwd()} se obtiene el directorio de trabajo actual:
+<<getwd>>=
+getwd()
+@
+\item Para ver los archivos  crpetas que hay en el directorio de trabajo actual:
+<<dir>>=
+dir()
+@
+
+\item El comando \texttt{ls()} muestra lo que exista en mi espacio de trabajo:
+<<ls>>=
+ls()
+@
+\end{itemize}
+\section{Conclusion}
+``I always thought something was fundamentally wrong with the universe'' 
+\end{document}
