@@ -1,0 +1,11 @@
+\documentclass{article}
+
+\begin{document}
+
+\begin{itemize}
+\item R Programming
+Añadiendo una línea
+\end {itemize}
+
+
+\end{document}

@@ -1,0 +1,556 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+
+\title{R Programming}
+\author{Martín Macías}
+\date{Diciembre de 2015}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\maketitle
+
+\section{Estableciendo el Directorio de trabajo}
+La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el directorio de trabajo.\\
+\begin{itemize}
+  \item Con la opción \texttt{getwd()} se obtiene el directorio de trabajo actual:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{getwd}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+[1] "/Users/Martin/Desktop/GitHub/datasciencecoursera"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item Para ver los archivos  crpetas que hay en el directorio de trabajo actual:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{dir}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+[1] "Example.Rnw"       "HelloWorld.md"     "R Programming.Rnw"
+[4] "R_Programming.bbl" "R_Programming.pdf" "R_Programming.Rnw"
+[7] "R_Programming.tex"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item El comando \texttt{ls()} muestra lo que exista en mi espacio de trabajo:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{ls}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+character(0)
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\section{Data types}
+  \subsection{Vectores y listas}
+    \subsubsection{Creando vectores}
+      La función \texttt{c()} se usa para crear vectores de objetos:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{0.6}\hlstd{)}      \hlcom{# Numérico}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{TRUE}\hlstd{,} \hlnum{FALSE}\hlstd{)}   \hlcom{# Lógico}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(T, F)}          \hlcom{# Lógico}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,}\hlstr{"c"}\hlstd{)}  \hlcom{# Caracter}
+  \hlstd{x} \hlkwb{<-} \hlnum{9}\hlopt{:}\hlnum{29}             \hlcom{# Entero}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{+}\hlnum{0i}\hlstd{,} \hlnum{2}\hlopt{+}\hlnum{4i}\hlstd{)}    \hlcom{# Complejo}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+      Usando la función \texttt{vector()}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{vector}\hlstd{(}\hlstr{"numeric"}\hlstd{,} \hlkwc{length} \hlstd{=} \hlnum{10}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+ [1] 0 0 0 0 0 0 0 0 0 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    \subsubsection{Mezclando objetos}
+      Miremos cómo se mezclan objetos en un vector
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{y} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1.7}\hlstd{,} \hlstr{"a"}\hlstd{)}    \hlcom{# Caracter}
+  \hlstd{y} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{TRUE}\hlstd{,} \hlnum{2}\hlstd{)}     \hlcom{# Numérico}
+  \hlstd{y} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlnum{TRUE}\hlstd{)}   \hlcom{# Caracter}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+    \subsubsection{Concatenación explícita}
+      Los objetos pueden concatenarse explícitamente de una clase a otra usando las         funciones \texttt{as.*}, si están disponibles:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{0}\hlopt{:}\hlnum{6}
+  \hlkwd{class}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "integer"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.numeric}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] 0 1 2 3 4 5 6
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.logical}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.character}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "0" "1" "2" "3" "4" "5" "6"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+      La concatenación sinsentido resulta en \texttt{NAs}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlstr{"c"}\hlstd{)}
+  \hlkwd{class}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "character"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.numeric}\hlstd{(x)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{Warning: NAs introduced by coercion}}\begin{verbatim}
+[1] NA NA NA
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.logical}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] NA NA NA
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{as.complex}\hlstd{(x)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{Warning: NAs introduced by coercion}}\begin{verbatim}
+[1] NA NA NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Listas}
+    Las listas son tipos de vectores especiales que pueen contener elementos de           diferentes clases.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlnum{1}\hlstd{,} \hlstr{"a"}\hlstd{,} \hlnum{TRUE}\hlstd{,} \hlnum{1} \hlopt{+} \hlnum{4i}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[[1]]
+[1] 1
+
+[[2]]
+[1] "a"
+
+[[3]]
+[1] TRUE
+
+[[4]]
+[1] 1+4i
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Matrices}
+    Las matrices son vectores con un atributo de dimensión. El atributo de dimensión      es, en sí mismo, un vector entero de longitud 2 \texttt{(nrow, ncol)}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{m} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwc{nrow} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{3}\hlstd{)}
+  \hlstd{m}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]   NA   NA   NA
+[2,]   NA   NA   NA
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{dim}\hlstd{(m)}
+\end{alltt}
+\begin{verbatim}
+[1] 2 3
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{attributes}\hlstd{(m)}
+\end{alltt}
+\begin{verbatim}
+$dim
+[1] 2 3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Las matrices se contruyen en el sentido de las columnas, es decir, en forma de       zig zag invertido
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{m} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{3}\hlstd{)}
+  \hlstd{m}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Las matrices también pueden crearse directamente de vectores añadiendo el            atributo de dimensión
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{m} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{10}
+  \hlstd{m}
+\end{alltt}
+\begin{verbatim}
+ [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{dim}\hlstd{(m)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{5}\hlstd{)}
+  \hlstd{m}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    3    5    7    9
+[2,]    2    4    6    8   10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Las matrices también pueden crearse mediante la unión de filas \texttt{rbind()} o     la unión de columnas \texttt{cbind}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{3}
+  \hlstd{y} \hlkwb{<-} \hlnum{10}\hlopt{:}\hlnum{12}
+  \hlkwd{cbind}\hlstd{(x ,y)}
+\end{alltt}
+\begin{verbatim}
+     x  y
+[1,] 1 10
+[2,] 2 11
+[3,] 3 12
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{rbind}\hlstd{(x, y)}
+\end{alltt}
+\begin{verbatim}
+  [,1] [,2] [,3]
+x    1    2    3
+y   10   11   12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Factores}
+    Los factores se usan para representar datos categóricos. Los factores pueden ser     ordenados o desordenados.
+      \begin{itemize}
+        \item Los factores son utilizados especialmente para modelar funciones como                \texttt{lm()} y \texttt{glm()}
+        \item Usar factores con labels es mejor que usar enteros puesto que los                    factores son autodescriptivos; tener una variable que tenga como                     valores <<Masculino>> y <<Femenino>> es mejor que tener una variable                 con 1 y 2.
+      \end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"yes"}\hlstd{,} \hlstr{"yes"}\hlstd{,} \hlstr{"no"}\hlstd{,} \hlstr{"yes"}\hlstd{,} \hlstr{"no"}\hlstd{))}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] yes yes no  yes no 
+Levels: no yes
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{table}\hlstd{(x)}    \hlcom{# Hace conteo de niveles que hay }
+\end{alltt}
+\begin{verbatim}
+x
+ no yes 
+  2   3 
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{unclass}\hlstd{(x)}  \hlcom{# Despoja de la clase que tenga el vector}
+\end{alltt}
+\begin{verbatim}
+[1] 2 2 1 2 1
+attr(,"levels")
+[1] "no"  "yes"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    El orden de los niveles se puede determinar usando el argumento \texttt{levels}      en \texttt{factor()}. Esto puede ser importante en modelación lineal porque el       primer nivel se usa como nivel de base.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"yes"}\hlstd{,} \hlstr{"yes"}\hlstd{,} \hlstr{"no"}\hlstd{,} \hlstr{"yes"}\hlstd{,} \hlstr{"no"}\hlstd{),}
+              \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"yes"}\hlstd{,} \hlstr{"no"}\hlstd{))}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] yes yes no  yes no 
+Levels: yes no
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Datos faltantes}
+    Los datos faltantes se denotan por \texttt{NA} o \texttt{NaN} para operaciones       matemáticas indefinidas.
+      \begin{itemize}
+        \item \texttt{is.na()} se usa para probar si los objetos son \texttt{NA}
+        \item \texttt{is.nan()} se usa para probar si los objetos son \texttt{NaN}
+        \item Los valores \texttt{NA} también tienen clase. Pueden ser enteros                     \texttt{NA}, caracter \texttt{NA}, etc.
+        \item Un valor \texttt{NaN} es también \texttt{NA} pero el recíproco no es                 cierto
+      \end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{3}\hlstd{)}
+  \hlkwd{is.na}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE  TRUE FALSE FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{is.nan}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE FALSE FALSE FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{NaN}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{4}\hlstd{)}
+  \hlkwd{is.na}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE  TRUE  TRUE FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{is.nan}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE  TRUE FALSE FALSE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Data frames}
+    Los data frames se usan para almacenar datos tabulados.
+      \begin{itemize}
+        \item Se representan como un tipo especial de lista donde cada elemento de la               lista debe tener la misma longitud.
+        \item Cada elemento de la lista se puede pensar como una columna y la                      longitud de cada elemento de la lista es el número de filas.
+        \item A diferencia de las matrices, los data frames pueden almacenar                       diferentes clases de objetos en cada columna (así como las listas): los               elementos de las matrices deben ser de la misma clase.
+        \item Los data frames también tienen un atributo especial llamado 
+              \texttt{row.names}
+        \item Los data frames se crean usualmente mediante \texttt{read.table()} o                 \texttt{read.csv()}
+        \item Los data frames pueden convertirse en matrices mediante 
+              \texttt{data.matrix()}
+      \end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{bar} \hlstd{=} \hlkwd{c}\hlstd{(T, T, F, F))}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+  foo   bar
+1   1  TRUE
+2   2  TRUE
+3   3 FALSE
+4   4 FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{nrow}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] 4
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{ncol}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+  \subsection{Atributos de nombre}
+    Los objetos en \texttt{R} también pueden tener nombres, los cuales son muy útiles     para esribir código legible y objetos autodescriptivos.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{3}
+  \hlkwd{names}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+NULL
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{names}\hlstd{(x)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"foo"}\hlstd{,} \hlstr{"bar"}\hlstd{,} \hlstr{"norf"}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+ foo  bar norf 
+   1    2    3 
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{names}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "foo"  "bar"  "norf"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Las listas también pueden tener nombres.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{b} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{c} \hlstd{=} \hlnum{3}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Para las matrices funciona de igual forma.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{m} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{)}
+  \hlkwd{dimnames}\hlstd{(m)} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{),} \hlkwd{c}\hlstd{(}\hlstr{"c"}\hlstd{,} \hlstr{"d"}\hlstd{))}
+  \hlstd{m}
+\end{alltt}
+\begin{verbatim}
+  c d
+a 1 3
+b 2 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\section{Leer datos tabulados}
+Existen unas pocas funciones principales para leer datos en \texttt{R}.
+  \begin{itemize}
+    \item \texttt{read.table} y \texttt{read.csv} para leer datos tabulados.
+    \item \texttt{readLines} para leer líneas de texto.
+    \item \texttt{source} para leer archivos de \texttt{R} (\texttt{inverse} de                \texttt{dump})
+    \item \texttt{dget} para leer archivos de \texttt{R} (\texttt{inverse} de                  \texttt{dput})
+    \item \texttt{load} para leer de espacios de trabajo guardados
+    \item \texttt{unserialize} para leer objetos de \texttt{R} en forma binaria.
+  \end{itemize}
+
+  \subsection{\texttt{read.table}}
+  La función \texttt{read.table} es una de las funciones más comúnmente usadas para    leer datos. Tienen unos pocos argumentos:
+  \begin{itemize}
+    \item \texttt{file}, el nombre de un archivo o conexión.
+    \item \texttt{header}, tipo lógico e indica si el archivo tiene línea de cabecera
+    \item \texttt{sep}, tipo cadena e indica cómo están separadas las columnas.
+    \item \texttt{colClasses}, un vector de caracteres que indica la clase de cada              columna en el conjunto de datos.
+    \item \texttt{nrows}, número de filas en el conjunto de datos.
+    \item \texttt{comment.char}, una cadena de caracteres que indica el caracter del           comentario.
+    \item \texttt{skip}, número de líneas que deben omitirse desde el principio.
+    \item \texttt{stringsAsFactors}, ¿deberían las variables caracter ser codificadas          como factores?
+\end{itemize}
+
+\textbf{Nota:} \texttt{read.table} trabaja con archivos separados por espacios mientras que \texttt{read.csv} trabaja con archivos separados por comas.
+
+
+
+
+
+
+
+
+
+
+\section{Conclusion}
+``I always thought something was fundamentally wrong with the universe'' 
+\end{document}
