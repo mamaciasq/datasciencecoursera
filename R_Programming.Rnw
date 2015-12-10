@@ -216,6 +216,44 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
 
 \textbf{Nota:} \texttt{read.table} trabaja con archivos separados por espacios mientras que \texttt{read.csv} trabaja con archivos separados por comas.
 
+  \subsection{Usando \texttt{read.table}}
+  El argumento \texttt{colClasses} acelera el uso de la función \texttt{read.table} hasta casi el doble. Para usar esta opción, debe conocerse la clase de cada columna de su data frame. Si todas las columnas son numéricas, por ejemplo, entonces debe ajustar el argumento así: \texttt{colClasses = "numeric"}. 
+      <<comment=NA, eval = F>>=
+        initial <- read.table("datatable.txt", nrows = 100)
+        classes <- sapply(initial, class)
+        tabAll <- read.table ("datatable.txt", colClasses = classes)
+      @
+  
+  Si configura \texttt{nrows} podrá ahorrar memoria. Puede usar la herramienta de Unix \texttt{wc} para calcular las líneas en un archivo.
+  
+  \subsection{Formatos de datos textuales}
+  \begin{itemize}
+    \item \texttt{dumping} y \texttt{dputing} son muy útiles porque el formato textual resultante es editable y en caso de que se corrompan, potenciablemente recuperable.
+    \item A diferencia de trabajar con una tabla o con un archivo csv, las funciones \texttt{dumping} y \texttt{dputing} conservan los metadatos (sacrificando algo de legibilidad) para que otro usuario no tenga que especificar todo de nuevo.  
+    \item Los formatos textuales pueden trabajar mucho mejor con programas de control de versiones, los cuales pueden rastrear cambios significativos es archivos de texto.
+    \item Los archivos textuales pueden ser más duraderos; en casod e que se corrompan, es más fácil hallar el problema dentro del archivo.
+    \item \textbf{Desventaja:} El formato no es eficiente en cuanto a ahorro de espacio.
+  \end{itemize}
+
+  \subsection{\texttt{dput}-ing objetos en \texttt{R}}
+      <<comment=NA>>=
+        y <- data.frame(a = 1, b = "a")
+        dput(y)
+        dput(y, file="y.R")
+        new.y <- dget("y.R")
+        new.y
+      @
+
+  \subsection{\texttt{dump}-ing objetos en \texttt{R}}
+      <<comment=NA>>=
+        x <- "foo"
+        y <- data.frame(a = 1, b = "a")
+        dump(c("x", "y"), file = "data.R")
+        rm(x, y)
+        source("data.R")
+        y
+        x
+      @
 
 
 

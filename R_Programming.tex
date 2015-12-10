@@ -80,9 +80,11 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
   \hlkwd{dir}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-[1] "Example.Rnw"       "HelloWorld.md"     "R Programming.Rnw"
-[4] "R_Programming.bbl" "R_Programming.pdf" "R_Programming.Rnw"
-[7] "R_Programming.tex"
+[1] "datasciencecoursera.Rproj" "HelloWorld.md"            
+[3] "R Programming.Rnw"         "R_Programming.bbl"        
+[5] "R_Programming.pdf"         "R_Programming.Rnw"        
+[7] "R_Programming.tex"         "README.md"                
+[9] "y.R"                      
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -542,6 +544,75 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
 
 \textbf{Nota:} \texttt{read.table} trabaja con archivos separados por espacios mientras que \texttt{read.csv} trabaja con archivos separados por comas.
 
+  \subsection{Usando \texttt{read.table}}
+  El argumento \texttt{colClasses} acelera el uso de la función \texttt{read.table} hasta casi el doble. Para usar esta opción, debe conocerse la clase de cada columna de su data frame. Si todas las columnas son numéricas, por ejemplo, entonces debe ajustar el argumento así: \texttt{colClasses = "numeric"}. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{initial} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"datatable.txt"}\hlstd{,} \hlkwc{nrows} \hlstd{=} \hlnum{100}\hlstd{)}
+  \hlstd{classes} \hlkwb{<-} \hlkwd{sapply}\hlstd{(initial, class)}
+  \hlstd{tabAll} \hlkwb{<-} \hlkwd{read.table} \hlstd{(}\hlstr{"datatable.txt"}\hlstd{,} \hlkwc{colClasses} \hlstd{= classes)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  
+  Si configura \texttt{nrows} podrá ahorrar memoria. Puede usar la herramienta de Unix \texttt{wc} para calcular las líneas en un archivo.
+  
+  \subsection{Formatos de datos textuales}
+  \begin{itemize}
+    \item \texttt{dumping} y \texttt{dputing} son muy útiles porque el formato textual resultante es editable y en caso de que se corrompan, potenciablemente recuperable.
+    \item A diferencia de trabajar con una tabla o con un archivo csv, las funciones \texttt{dumping} y \texttt{dputing} conservan los metadatos (sacrificando algo de legibilidad) para que otro usuario no tenga que especificar todo de nuevo.  
+    \item Los formatos textuales pueden trabajar mucho mejor con programas de control de versiones, los cuales pueden rastrear cambios significativos es archivos de texto.
+    \item Los archivos textuales pueden ser más duraderos; en casod e que se corrompan, es más fácil hallar el problema dentro del archivo.
+    \item \textbf{Desventaja:} El formato no es eficiente en cuanto a ahorro de espacio.
+  \end{itemize}
+
+  \subsection{\texttt{dput}-ing objetos en \texttt{R}}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{y} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{b} \hlstd{=} \hlstr{"a"}\hlstd{)}
+  \hlkwd{dput}\hlstd{(y)}
+\end{alltt}
+\begin{verbatim}
+structure(list(a = 1, b = structure(1L, .Label = "a", class = "factor")), .Names = c("a", 
+"b"), row.names = c(NA, -1L), class = "data.frame")
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{dput}\hlstd{(y,} \hlkwc{file}\hlstd{=}\hlstr{"y.R"}\hlstd{)}
+  \hlstd{new.y} \hlkwb{<-} \hlkwd{dget}\hlstd{(}\hlstr{"y.R"}\hlstd{)}
+  \hlstd{new.y}
+\end{alltt}
+\begin{verbatim}
+  a b
+1 1 a
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{\texttt{dump}-ing objetos en \texttt{R}}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlstr{"foo"}
+  \hlstd{y} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{b} \hlstd{=} \hlstr{"a"}\hlstd{)}
+  \hlkwd{dump}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"x"}\hlstd{,} \hlstr{"y"}\hlstd{),} \hlkwc{file} \hlstd{=} \hlstr{"data.R"}\hlstd{)}
+  \hlkwd{rm}\hlstd{(x, y)}
+  \hlkwd{source}\hlstd{(}\hlstr{"data.R"}\hlstd{)}
+  \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+  a b
+1 1 a
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] "foo"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 
