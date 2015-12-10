@@ -80,11 +80,11 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
   \hlkwd{dir}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-[1] "datasciencecoursera.Rproj" "HelloWorld.md"            
-[3] "R Programming.Rnw"         "R_Programming.bbl"        
-[5] "R_Programming.pdf"         "R_Programming.Rnw"        
-[7] "R_Programming.tex"         "README.md"                
-[9] "y.R"                      
+ [1] "data.R"                    "datasciencecoursera.Rproj"
+ [3] "HelloWorld.md"             "R Programming.Rnw"        
+ [5] "R_Programming.bbl"         "R_Programming.pdf"        
+ [7] "R_Programming.Rnw"         "R_Programming.tex"        
+ [9] "README.md"                 "y.R"                      
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -571,17 +571,18 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-  \hlstd{y} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{b} \hlstd{=} \hlstr{"a"}\hlstd{)}
-  \hlkwd{dput}\hlstd{(y)}
+\hlkwd{options}\hlstd{(}\hlkwc{width} \hlstd{=} \hlnum{55}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{b} \hlstd{=} \hlstr{"a"}\hlstd{)}
+\hlkwd{dput}\hlstd{(y)}
 \end{alltt}
 \begin{verbatim}
 structure(list(a = 1, b = structure(1L, .Label = "a", class = "factor")), .Names = c("a", 
 "b"), row.names = c(NA, -1L), class = "data.frame")
 \end{verbatim}
 \begin{alltt}
-  \hlkwd{dput}\hlstd{(y,} \hlkwc{file}\hlstd{=}\hlstr{"y.R"}\hlstd{)}
-  \hlstd{new.y} \hlkwb{<-} \hlkwd{dget}\hlstd{(}\hlstr{"y.R"}\hlstd{)}
-  \hlstd{new.y}
+\hlkwd{dput}\hlstd{(y,} \hlkwc{file}\hlstd{=}\hlstr{"y.R"}\hlstd{)}
+\hlstd{new.y} \hlkwb{<-} \hlkwd{dget}\hlstd{(}\hlstr{"y.R"}\hlstd{)}
+\hlstd{new.y}
 \end{alltt}
 \begin{verbatim}
   a b
@@ -589,7 +590,6 @@ structure(list(a = 1, b = structure(1L, .Label = "a", class = "factor")), .Names
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
   \subsection{\texttt{dump}-ing objetos en \texttt{R}}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -614,6 +614,18 @@ structure(list(a = 1, b = structure(1L, .Label = "a", class = "factor")), .Names
 \end{kframe}
 \end{knitrout}
 
+  \subsection{Conexiones a archivos}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{str}\hlstd{(file)}
+\end{alltt}
+\begin{verbatim}
+function (description = "", open = "", blocking = TRUE, 
+    encoding = getOption("encoding"), raw = FALSE)  
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 

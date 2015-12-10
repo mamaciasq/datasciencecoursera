@@ -236,14 +236,14 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
   \end{itemize}
 
   \subsection{\texttt{dput}-ing objetos en \texttt{R}}
-      <<comment=NA>>=
+        <<comment=NA>>=
+        options(width = 55)
         y <- data.frame(a = 1, b = "a")
         dput(y)
         dput(y, file="y.R")
         new.y <- dget("y.R")
         new.y
       @
-
   \subsection{\texttt{dump}-ing objetos en \texttt{R}}
       <<comment=NA>>=
         x <- "foo"
@@ -255,6 +255,11 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
         x
       @
 
+  \subsection{Conexiones a archivos}
+        <<comment = NA, echo = 2>>=
+        options(width = 60)
+        str(file)
+      @
 
 
 
