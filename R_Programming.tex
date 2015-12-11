@@ -145,7 +145,7 @@ character(0)
 \end{knitrout}
 
     \subsubsection{Concatenación explícita}
-      Los objetos pueden concatenarse explícitamente de una clase a otra usando las         funciones \texttt{as.*}, si están disponibles:
+      Los objetos pueden concatenarse explícitamente de una clase a otra usando las funciones \texttt{as.*}, si están disponibles:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -212,7 +212,7 @@ character(0)
 \end{knitrout}
 
   \subsection{Listas}
-    Las listas son tipos de vectores especiales que pueen contener elementos de           diferentes clases.
+    Las listas son tipos de vectores especiales que pueen contener elementos de diferentes clases.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -236,7 +236,7 @@ character(0)
 \end{knitrout}
 
   \subsection{Matrices}
-    Las matrices son vectores con un atributo de dimensión. El atributo de dimensión      es, en sí mismo, un vector entero de longitud 2 \texttt{(nrow, ncol)}
+    Las matrices son vectores con un atributo de dimensión. El atributo de dimensión es, en sí mismo, un vector entero de longitud 2 \texttt{(nrow, ncol)}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -264,7 +264,7 @@ $dim
 \end{kframe}
 \end{knitrout}
 
-    Las matrices se contruyen en el sentido de las columnas, es decir, en forma de       zig zag invertido
+    Las matrices se contruyen en el sentido de las columnas, es decir, en forma de "zig zag" invertido
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -279,7 +279,7 @@ $dim
 \end{kframe}
 \end{knitrout}
 
-    Las matrices también pueden crearse directamente de vectores añadiendo el            atributo de dimensión
+    Las matrices también pueden crearse directamente de vectores añadiendo el atributo de dimensión
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -301,7 +301,7 @@ $dim
 \end{kframe}
 \end{knitrout}
 
-    Las matrices también pueden crearse mediante la unión de filas \texttt{rbind()} o     la unión de columnas \texttt{cbind}
+    Las matrices también pueden crearse mediante la unión de filas \texttt{rbind()} o la unión de columnas \texttt{cbind}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -327,10 +327,10 @@ y   10   11   12
 \end{knitrout}
 
   \subsection{Factores}
-    Los factores se usan para representar datos categóricos. Los factores pueden ser     ordenados o desordenados.
+    Los factores se usan para representar datos categóricos. Los factores pueden ser ordenados o desordenados.
       \begin{itemize}
         \item Los factores son utilizados especialmente para modelar funciones como                \texttt{lm()} y \texttt{glm()}
-        \item Usar factores con labels es mejor que usar enteros puesto que los                    factores son autodescriptivos; tener una variable que tenga como                     valores <<Masculino>> y <<Femenino>> es mejor que tener una variable                 con 1 y 2.
+        \item Usar factores con labels es mejor que usar enteros puesto que los factores son autodescriptivos; tener una variable que tenga como valores <<Masculino>> y <<Femenino>> es mejor que tener una variable con 1 y 2.
       \end{itemize}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -361,7 +361,7 @@ attr(,"levels")
 \end{kframe}
 \end{knitrout}
 
-    El orden de los niveles se puede determinar usando el argumento \texttt{levels}      en \texttt{factor()}. Esto puede ser importante en modelación lineal porque el       primer nivel se usa como nivel de base.
+    El orden de los niveles se puede determinar usando el argumento \texttt{levels} en \texttt{factor()}. Esto puede ser importante en modelación lineal porque el primer nivel se usa como nivel de base.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -377,7 +377,7 @@ Levels: yes no
 \end{knitrout}
 
   \subsection{Datos faltantes}
-    Los datos faltantes se denotan por \texttt{NA} o \texttt{NaN} para operaciones       matemáticas indefinidas.
+    Los datos faltantes se denotan por \texttt{NA} o \texttt{NaN} para operaciones matemáticas indefinidas.
       \begin{itemize}
         \item \texttt{is.na()} se usa para probar si los objetos son \texttt{NA}
         \item \texttt{is.nan()} se usa para probar si los objetos son \texttt{NaN}
@@ -418,9 +418,9 @@ Levels: yes no
   \subsection{Data frames}
     Los data frames se usan para almacenar datos tabulados.
       \begin{itemize}
-        \item Se representan como un tipo especial de lista donde cada elemento de la               lista debe tener la misma longitud.
-        \item Cada elemento de la lista se puede pensar como una columna y la                      longitud de cada elemento de la lista es el número de filas.
-        \item A diferencia de las matrices, los data frames pueden almacenar                       diferentes clases de objetos en cada columna (así como las listas): los               elementos de las matrices deben ser de la misma clase.
+        \item Se representan como un tipo especial de lista donde cada elemento de la lista debe tener la misma longitud.
+        \item Cada elemento de la lista se puede pensar como una columna y la longitud de cada elemento de la lista es el número de filas.
+        \item A diferencia de las matrices, los data frames pueden almacenar diferentes clases de objetos en cada columna (así como las listas): los elementos de las matrices deben ser de la misma clase.
         \item Los data frames también tienen un atributo especial llamado 
               \texttt{row.names}
         \item Los data frames se crean usualmente mediante \texttt{read.table()} o                 \texttt{read.csv()}
@@ -456,7 +456,7 @@ Levels: yes no
 \end{knitrout}
     
   \subsection{Atributos de nombre}
-    Los objetos en \texttt{R} también pueden tener nombres, los cuales son muy útiles     para esribir código legible y objetos autodescriptivos.
+    Los objetos en \texttt{R} también pueden tener nombres, los cuales son muy útiles para esribir código legible y objetos autodescriptivos.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -530,16 +530,16 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
   \end{itemize}
 
   \subsection{\texttt{read.table}}
-  La función \texttt{read.table} es una de las funciones más comúnmente usadas para    leer datos. Tienen unos pocos argumentos:
+  La función \texttt{read.table} es una de las funciones más comúnmente usadas para leer datos. Tienen unos pocos argumentos:
   \begin{itemize}
     \item \texttt{file}, el nombre de un archivo o conexión.
     \item \texttt{header}, tipo lógico e indica si el archivo tiene línea de cabecera
     \item \texttt{sep}, tipo cadena e indica cómo están separadas las columnas.
-    \item \texttt{colClasses}, un vector de caracteres que indica la clase de cada              columna en el conjunto de datos.
+    \item \texttt{colClasses}, un vector de caracteres que indica la clase de cada columna en el conjunto de datos.
     \item \texttt{nrows}, número de filas en el conjunto de datos.
-    \item \texttt{comment.char}, una cadena de caracteres que indica el caracter del           comentario.
+    \item \texttt{comment.char}, una cadena de caracteres que indica el caracter del comentario.
     \item \texttt{skip}, número de líneas que deben omitirse desde el principio.
-    \item \texttt{stringsAsFactors}, ¿deberían las variables caracter ser codificadas          como factores?
+    \item \texttt{stringsAsFactors}, ¿deberían las variables caracter ser codificadas como factores?
 \end{itemize}
 
 \textbf{Nota:} \texttt{read.table} trabaja con archivos separados por espacios mientras que \texttt{read.csv} trabaja con archivos separados por comas.
@@ -626,11 +626,68 @@ function (description = "", open = "", blocking = TRUE,
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+  \begin{itemize}
+    \item \texttt{description} es el nombre del archivo.
+    \item \texttt{open} es un incador de código.
+      \begin{itemize}
+        \item "r" para únicamente lectura
+        \item "w" escritura e iniciando un nuevo archivo
+        \item "a" anexar
+        \item "rb", "wb", "ab" leer, escribir y anexar en modo Binario (Windows) 
+      \end{itemize}
+  \end{itemize}
+  
+  \subsection{Conexiones}
+  En general, las conexiones son herramientas poderosas para navegar entre archivos u otros objetos. En la práctica, no se necesita enfrentarse directamente con la interfaz de conexión. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{con} \hlkwb{<-} \hlkwd{file}\hlstd{(}\hlstr{"foo.txt"}\hlstd{,} \hlstr{"r"}\hlstd{)}
+  \hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(con)}
+  \hlkwd{close}\hlstd{(con)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
+es lo mismo que
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"foo.txt"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
-
-
-
+  \subsection{Leer líneas de un archivo de texto}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{con} \hlkwb{<-} \hlkwd{gzfile}\hlstd{(}\hlstr{"words.gz"}\hlstd{)}
+  \hlstd{x} \hlkwb{<-} \hlkwd{readLines}\hlstd{(con,} \hlnum{10}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  \texttt{writeLines} toma un vector de caracteres y escribe cada elemento de una línea al tiempo en un archivo de texto.
+  
+  \texttt{readLines} puede ser útil para leer líneas de páginas web.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlcom{## Esto puede tomar algunos minutos}
+  \hlstd{con} \hlkwb{<-} \hlkwd{url}\hlstd{(}\hlstr{"http://www.jhsph.edu"}\hlstd{,} \hlstr{"r"}\hlstd{)}
+  \hlstd{x} \hlkwb{<-} \hlkwd{readLines}\hlstd{(con)}
+  \hlkwd{head}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "<!DOCTYPE html>"                                               
+[2] "<html lang=\"en\">"                                            
+[3] ""                                                              
+[4] "<head>"                                                        
+[5] "<meta charset=\"utf-8\" />"                                    
+[6] "<title>Johns Hopkins Bloomberg School of Public Health</title>"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 

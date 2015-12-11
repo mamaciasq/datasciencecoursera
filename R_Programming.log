@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.5)  10 DEC 2015 16:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.5)  10 DEC 2015 22:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,7 +459,24 @@ Overfull \hbox (122.24593pt too wide) in paragraph at lines 581--581
 
 Package color Info: Redefining color shadecolor on input line 595.
 Package color Info: Redefining color shadecolor on input line 619.
-[10] (./R_Programming.aux) ) 
+[10]
+Package color Info: Redefining color shadecolor on input line 643.
+
+Overfull \hbox (6.25058pt too wide) in paragraph at lines 641--643
+\OT1/cmr/m/n/10 En gen-eral, las conex-iones son her-ramien-tas poderosas para 
+nave-gar en-tre archivos
+ []
+
+Package color Info: Redefining color shadecolor on input line 654.
+Package color Info: Redefining color shadecolor on input line 663.
+Package color Info: Redefining color shadecolor on input line 674.
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 688--688
+[]\OT1/cmtt/m/n/10 [6] "<title>Johns Hopkins Bloomberg School of Public Health<
+/title>"[] 
+ []
+
+[11] (./R_Programming.aux) ) 
 Here is how much of TeX's memory you used:
  1877 strings out of 493054
  26089 string characters out of 6134760
@@ -478,10 +495,10 @@ sfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmtt12.pfb>
-Output written on R_Programming.pdf (10 pages, 120736 bytes).
+Output written on R_Programming.pdf (11 pages, 124224 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

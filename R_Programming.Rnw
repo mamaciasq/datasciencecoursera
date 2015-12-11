@@ -56,7 +56,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
         @      
 
     \subsubsection{Concatenación explícita}
-      Los objetos pueden concatenarse explícitamente de una clase a otra usando las         funciones \texttt{as.*}, si están disponibles:
+      Los objetos pueden concatenarse explícitamente de una clase a otra usando las funciones \texttt{as.*}, si están disponibles:
         <<comment=NA>>=
           x <- 0:6
           class(x)
@@ -75,14 +75,14 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
         @ 
 
   \subsection{Listas}
-    Las listas son tipos de vectores especiales que pueen contener elementos de           diferentes clases.
+    Las listas son tipos de vectores especiales que pueen contener elementos de diferentes clases.
       <<comment=NA>>=
         x <- list(1, "a", TRUE, 1 + 4i)
         x
       @     
 
   \subsection{Matrices}
-    Las matrices son vectores con un atributo de dimensión. El atributo de dimensión      es, en sí mismo, un vector entero de longitud 2 \texttt{(nrow, ncol)}
+    Las matrices son vectores con un atributo de dimensión. El atributo de dimensión es, en sí mismo, un vector entero de longitud 2 \texttt{(nrow, ncol)}
       <<comment=NA>>=
         m <- matrix(nrow = 2, ncol = 3)
         m
@@ -90,13 +90,13 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
         attributes(m)
       @     
 
-    Las matrices se contruyen en el sentido de las columnas, es decir, en forma de       zig zag invertido
+    Las matrices se contruyen en el sentido de las columnas, es decir, en forma de "zig zag" invertido
       <<comment=NA>>=
         m <- matrix(1:6, nrow = 2, ncol = 3)
         m
       @     
 
-    Las matrices también pueden crearse directamente de vectores añadiendo el            atributo de dimensión
+    Las matrices también pueden crearse directamente de vectores añadiendo el atributo de dimensión
       <<comment=NA>>=
         m <- 1:10
         m
@@ -104,7 +104,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
         m
       @         
 
-    Las matrices también pueden crearse mediante la unión de filas \texttt{rbind()} o     la unión de columnas \texttt{cbind}
+    Las matrices también pueden crearse mediante la unión de filas \texttt{rbind()} o la unión de columnas \texttt{cbind}
       <<comment=NA>>=
         x <- 1:3
         y <- 10:12
@@ -113,10 +113,10 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
       @
 
   \subsection{Factores}
-    Los factores se usan para representar datos categóricos. Los factores pueden ser     ordenados o desordenados.
+    Los factores se usan para representar datos categóricos. Los factores pueden ser ordenados o desordenados.
       \begin{itemize}
         \item Los factores son utilizados especialmente para modelar funciones como                \texttt{lm()} y \texttt{glm()}
-        \item Usar factores con labels es mejor que usar enteros puesto que los                    factores son autodescriptivos; tener una variable que tenga como                     valores <<Masculino>> y <<Femenino>> es mejor que tener una variable                 con 1 y 2.
+        \item Usar factores con labels es mejor que usar enteros puesto que los factores son autodescriptivos; tener una variable que tenga como valores <<Masculino>> y <<Femenino>> es mejor que tener una variable con 1 y 2.
       \end{itemize}
       <<comment=NA>>=
         x <- factor(c("yes", "yes", "no", "yes", "no"))
@@ -125,7 +125,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
         unclass(x)  # Despoja de la clase que tenga el vector
       @
 
-    El orden de los niveles se puede determinar usando el argumento \texttt{levels}      en \texttt{factor()}. Esto puede ser importante en modelación lineal porque el       primer nivel se usa como nivel de base.
+    El orden de los niveles se puede determinar usando el argumento \texttt{levels} en \texttt{factor()}. Esto puede ser importante en modelación lineal porque el primer nivel se usa como nivel de base.
       <<comment=NA>>=
         x <- factor(c("yes", "yes", "no", "yes", "no"), 
                     levels = c("yes", "no"))
@@ -133,7 +133,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
       @
 
   \subsection{Datos faltantes}
-    Los datos faltantes se denotan por \texttt{NA} o \texttt{NaN} para operaciones       matemáticas indefinidas.
+    Los datos faltantes se denotan por \texttt{NA} o \texttt{NaN} para operaciones matemáticas indefinidas.
       \begin{itemize}
         \item \texttt{is.na()} se usa para probar si los objetos son \texttt{NA}
         \item \texttt{is.nan()} se usa para probar si los objetos son \texttt{NaN}
@@ -152,9 +152,9 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
   \subsection{Data frames}
     Los data frames se usan para almacenar datos tabulados.
       \begin{itemize}
-        \item Se representan como un tipo especial de lista donde cada elemento de la               lista debe tener la misma longitud.
-        \item Cada elemento de la lista se puede pensar como una columna y la                      longitud de cada elemento de la lista es el número de filas.
-        \item A diferencia de las matrices, los data frames pueden almacenar                       diferentes clases de objetos en cada columna (así como las listas): los               elementos de las matrices deben ser de la misma clase.
+        \item Se representan como un tipo especial de lista donde cada elemento de la lista debe tener la misma longitud.
+        \item Cada elemento de la lista se puede pensar como una columna y la longitud de cada elemento de la lista es el número de filas.
+        \item A diferencia de las matrices, los data frames pueden almacenar diferentes clases de objetos en cada columna (así como las listas): los elementos de las matrices deben ser de la misma clase.
         \item Los data frames también tienen un atributo especial llamado 
               \texttt{row.names}
         \item Los data frames se crean usualmente mediante \texttt{read.table()} o                 \texttt{read.csv()}
@@ -169,7 +169,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
       @
     
   \subsection{Atributos de nombre}
-    Los objetos en \texttt{R} también pueden tener nombres, los cuales son muy útiles     para esribir código legible y objetos autodescriptivos.
+    Los objetos en \texttt{R} también pueden tener nombres, los cuales son muy útiles para esribir código legible y objetos autodescriptivos.
       <<comment=NA>>=
         x <- 1:3
         names(x)
@@ -202,16 +202,16 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
   \end{itemize}
 
   \subsection{\texttt{read.table}}
-  La función \texttt{read.table} es una de las funciones más comúnmente usadas para    leer datos. Tienen unos pocos argumentos:
+  La función \texttt{read.table} es una de las funciones más comúnmente usadas para leer datos. Tienen unos pocos argumentos:
   \begin{itemize}
     \item \texttt{file}, el nombre de un archivo o conexión.
     \item \texttt{header}, tipo lógico e indica si el archivo tiene línea de cabecera
     \item \texttt{sep}, tipo cadena e indica cómo están separadas las columnas.
-    \item \texttt{colClasses}, un vector de caracteres que indica la clase de cada              columna en el conjunto de datos.
+    \item \texttt{colClasses}, un vector de caracteres que indica la clase de cada columna en el conjunto de datos.
     \item \texttt{nrows}, número de filas en el conjunto de datos.
-    \item \texttt{comment.char}, una cadena de caracteres que indica el caracter del           comentario.
+    \item \texttt{comment.char}, una cadena de caracteres que indica el caracter del comentario.
     \item \texttt{skip}, número de líneas que deben omitirse desde el principio.
-    \item \texttt{stringsAsFactors}, ¿deberían las variables caracter ser codificadas          como factores?
+    \item \texttt{stringsAsFactors}, ¿deberían las variables caracter ser codificadas como factores?
 \end{itemize}
 
 \textbf{Nota:} \texttt{read.table} trabaja con archivos separados por espacios mientras que \texttt{read.csv} trabaja con archivos separados por comas.
@@ -260,11 +260,44 @@ Existen unas pocas funciones principales para leer datos en \texttt{R}.
         options(width = 60)
         str(file)
       @
+  \begin{itemize}
+    \item \texttt{description} es el nombre del archivo.
+    \item \texttt{open} es un incador de código.
+      \begin{itemize}
+        \item "r" para únicamente lectura
+        \item "w" escritura e iniciando un nuevo archivo
+        \item "a" anexar
+        \item "rb", "wb", "ab" leer, escribir y anexar en modo Binario (Windows) 
+      \end{itemize}
+  \end{itemize}
+  
+  \subsection{Conexiones}
+  En general, las conexiones son herramientas poderosas para navegar entre archivos u otros objetos. En la práctica, no se necesita enfrentarse directamente con la interfaz de conexión. 
+      <<comment = NA, eval = F>>=
+        con <- file("foo.txt", "r")
+        data <- read.csv(con)
+        close(con)
+      @
 
+es lo mismo que
+      <<comment = NA, eval = F>>=
+        data <- read.csv("foo.txt")
+      @
 
-
-
-
+  \subsection{Leer líneas de un archivo de texto}
+      <<comment = NA, eval = F>>=
+        con <- gzfile("words.gz")
+        x <- readLines(con, 10)
+      @
+  \texttt{writeLines} toma un vector de caracteres y escribe cada elemento de una línea al tiempo en un archivo de texto.
+  
+  \texttt{readLines} puede ser útil para leer líneas de páginas web.
+      <<comment = NA>>=
+        ## Esto puede tomar algunos minutos
+        con <- url("http://www.jhsph.edu", "r")
+        x <- readLines(con)
+        head(x)
+      @
 
 
 
