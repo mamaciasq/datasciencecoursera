@@ -689,8 +689,343 @@ es lo mismo que
 \end{kframe}
 \end{knitrout}
 
+  \subsection{Subconjunto}
+  Existen un gran número de operadores que pueden usarse para extraer subconjuntos de objetos en \texttt{R}. 
+  \begin{itemize}
+    \item \texttt{[ ]} siempre arroja un objeto de la misma clase del original; puede usarse para seleccionar más de un elemento (hay una excepción).
+    \item \texttt{[[ ]]} se usa para extraer elementos de una lista o de un data frame; únicamente puede usarse un solo elemento y la clase del objeto obtenido no necesariamente es una lista o un data frame.
+    \item \texttt{\$} se usa para extraer elementos de una lista o un data frame por nombre; la semántica es igual a la de \texttt{[[ ]]}.
+  \end{itemize}
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlstr{"c"}\hlstd{,} \hlstr{"c"}\hlstd{,} \hlstr{"d"}\hlstd{,} \hlstr{"a"}\hlstd{)}
+  \hlstd{x[}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] "a"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] "b"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] "a" "b" "c" "c"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[x} \hlopt{>} \hlstr{"a"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] "b" "c" "c" "d"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{u} \hlkwb{<-} \hlstd{x} \hlopt{>} \hlstr{"a"}
+  \hlstd{u}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[u]}
+\end{alltt}
+\begin{verbatim}
+[1] "b" "c" "c" "d"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+  \subsubsection{Listas de Subconjuntos}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{bar} \hlstd{=} \hlnum{0.6}\hlstd{)}
+  \hlstd{x[}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+$foo
+[1] 1 2 3 4
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlnum{1}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 3 4
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x}\hlopt{$}\hlstd{bar}
+\end{alltt}
+\begin{verbatim}
+[1] 0.6
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlstr{"bar"}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+[1] 0.6
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlstr{"bar"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+$bar
+[1] 0.6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{bar} \hlstd{=} \hlnum{0.6}\hlstd{,} \hlkwc{baz} \hlstd{=} \hlstr{"hello"}\hlstd{)}
+  \hlstd{x[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)]}
+\end{alltt}
+\begin{verbatim}
+$foo
+[1] 1 2 3 4
+
+$baz
+[1] "hello"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+El operador \texttt{[[]]} puede usarse con índices computados; \texttt{\$} puede usarse exclusivamente con nombres literales.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{bar} \hlstd{=} \hlnum{0.6}\hlstd{,} \hlkwc{baz} \hlstd{=} \hlstr{"hello"}\hlstd{)}
+  \hlstd{name} \hlkwb{<-} \hlstr{"foo"}
+  \hlstd{x[[name]]}   \hlcom{## índice computado para 'foo'}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 3 4
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x}\hlopt{$}\hlstd{name}      \hlcom{## ¡el elemento 'name' no existe!}
+\end{alltt}
+\begin{verbatim}
+NULL
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x}\hlopt{$}\hlstd{foo}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 3 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\texttt{[[]]} puede tomar una secuencia de enteros.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{a} \hlstd{=} \hlkwd{list}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{12}\hlstd{,} \hlnum{14}\hlstd{),} \hlkwc{b} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3.14}\hlstd{,} \hlnum{2.81}\hlstd{))}
+  \hlstd{x[[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)]]}
+\end{alltt}
+\begin{verbatim}
+[1] 14
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlnum{1}\hlstd{]][[}\hlnum{3}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+[1] 14
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{1}\hlstd{)]]}
+\end{alltt}
+\begin{verbatim}
+[1] 3.14
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    \subsubsection{Matrices}
+    De las matrices se puede crear también subconjuntos de la forma usual, con índices de la forma \textit{(i, j)}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{)}
+  \hlstd{x[}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+    U omitir los índices si se quiere:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x[}\hlnum{1}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 3 5
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[ ,}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 3 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    Por defecto, cuando un elemento solo de una matriz es recuperado, éste se retorna como un vector de longitud 1 en vez de ser una matriz de dimensión 1 x 1. Este proceder puede ser modificado mediante el argumento \texttt{drop = FALSE}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{)}
+  \hlstd{x[}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlkwc{drop} \hlstd{=} \hlnum{FALSE}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+     [,1]
+[1,]    3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    De la misma manera, al hacer subconjuntos de una sola columna o una sola fila, el programa arrojará un vector, no una matriz (por defecto)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x[}\hlnum{1}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 3 5
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{1}\hlstd{, ,} \hlkwc{drop} \hlstd{=} \hlnum{FALSE}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    1    3    5
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    \subsubsection{Subconjuntos con nombres}
+    La coincidencia parcial de nombres se permite con \texttt{[[]]} y \texttt{\$}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{aardvark} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{)}
+  \hlstd{x}\hlopt{$}\hlstd{a}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 3 4 5
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlstr{"a"}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+NULL
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[[}\hlstr{"a"}\hlstd{,} \hlkwc{exact} \hlstd{=} \hlnum{FALSE}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 3 4 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+    \subsubsection{Eliminando valores faltantes}
+    Una tarea común es eiminar valores faltantes \texttt{(NAS)}.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{5}\hlstd{)}
+  \hlstd{bad} \hlkwb{<-} \hlkwd{is.na}\hlstd{(x)}
+  \hlstd{x[}\hlopt{!}\hlstd{bad]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 4 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    ¿Y qué pasaría si existen multiples cosas y usted quiere tomar el subconjunto con los valores no faltantes?
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{5}\hlstd{)}
+  \hlstd{y} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlnum{NA}\hlstd{,} \hlstr{"d"}\hlstd{,} \hlnum{NA}\hlstd{,} \hlstr{"f"}\hlstd{)}
+  \hlstd{good} \hlkwb{<-} \hlkwd{complete.cases}\hlstd{(x, y)}
+  \hlstd{good}
+\end{alltt}
+\begin{verbatim}
+[1]  TRUE  TRUE FALSE  TRUE FALSE  TRUE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x[good]}
+\end{alltt}
+\begin{verbatim}
+[1] 1 2 4 5
+\end{verbatim}
+\begin{alltt}
+  \hlstd{y[good]}
+\end{alltt}
+\begin{verbatim}
+[1] "a" "b" "d" "f"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{airquality[}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+\end{verbatim}
+\begin{alltt}
+  \hlstd{good} \hlkwb{<-} \hlkwd{complete.cases}\hlstd{(airquality)}
+  \hlstd{airquality[good, ][}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+7    23     299  8.6   65     5   7
+8    19      99 13.8   59     5   8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \section{Conclusion}
 ``I always thought something was fundamentally wrong with the universe'' 
 \end{document}
