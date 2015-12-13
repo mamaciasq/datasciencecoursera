@@ -410,6 +410,25 @@ El operador \texttt{[[]]} puede usarse con índices computados; \texttt{\$} pued
         good <- complete.cases(airquality)
         airquality[good, ][1:6, ]
       @
+
+\section{Operaciones vectorizadas}
+Muchas operaciones en \texttt[R] son \textit{vectorizadas} volviendo el código más eficiente, conciso y fácil de leer.
+      <<comment = NA>>=
+        x <- 1:4; y <- 6:9
+        x + y
+        x > 2
+        x >= 2
+        y == 8
+        x * y
+        x / y
+      @
+      
+      <<comment = NA>>=
+        x <- matrix(1:4, 2, 2); y <- matrix(rep(10, 4), 2, 2)
+        x * y   ## Multiplicación término a término
+        x / y
+        x %*% y ## Multiplicación real de matrices
+      @
 \section{Conclusion}
 ``I always thought something was fundamentally wrong with the universe'' 
 \end{document}

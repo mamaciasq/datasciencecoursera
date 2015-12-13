@@ -1,0 +1,309 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+
+\title{R Programming\\ Quizzes}
+\author{Martín Macías}
+\date{Diciembre de 2015}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\maketitle
+
+\section{Quiz 1}
+\begin{enumerate}
+  \item The R language is a dialect of which of the following programming languages?\\
+  \textit{\texttt{R} is a dialect of the \texttt{S} language which was developed at Bell Labs.}
+  
+    \item The definition of free software consists of four freedoms (freedoms 0 through 3). Which of the following is NOT one of the freedoms that are part of the definition?\\
+  \textit{The freedom to sell the software for any price. This is not part of the free software definition. The free software definition does not mention anything about selling software (although it does not disallow it).}
+  
+  \item In R the following are all atomic data types EXCEPT\\
+  \textit{\texttt{data frame} is not an atomic data type in \texttt{R}.}
+  
+  \item If I execute the expression \texttt{x <- 4L} in \texttt{R}, what is the class of the object \texttt{x} as determined by the \texttt{class()} function?\\
+  \textit{The \texttt{L} suffix creates an integer vector as opposed to a numeric vector.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{4L}
+  \hlkwd{class}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "integer"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item What is the class of the object defined by \texttt{x <- c(4, TRUE)}?
+  \texttt{The numeric class is the "lowest common denominator" here and so all elements will be coerced into that class.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,} \hlnum{TRUE}\hlstd{)}
+  \hlkwd{class}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "numeric"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \textbf{Question Explanation}: \texttt{R} does automatic coercion of vectors so that all elements of the vector are the same data class.
+  
+  \item If I have two vectors \texttt{x <- c(1,3, 5)} and \texttt{y <- c(3, 2, 10)}, what is produced by the expression \texttt{cbind(x, y)}?\\
+  \emph{The \texttt{cbind} function treats vectors as if they were columns of a matrix. It then takes those vectors and binds them together column-wise to create a matrix.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{3}\hlstd{,} \hlnum{5}\hlstd{); y} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{10}\hlstd{)}
+  \hlkwd{cbind}\hlstd{(x, y)}
+\end{alltt}
+\begin{verbatim}
+     x  y
+[1,] 1  3
+[2,] 3  2
+[3,] 5 10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+  \item A key property of vectors in R is that
+  \emph{Elements of a vector all must be of the same class}
+  
+  \item Suppose I have a list defined as \texttt{x <- list(2, "a", "b", TRUE)}. What does \texttt{x[[1]]} give me?
+  \emph{a numeric vector of length 1.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlnum{2}\hlstd{,} \hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlnum{TRUE}\hlstd{)}
+  \hlstd{x[[}\hlnum{1}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item Suppose I have a vector \texttt{x <- 1:4} and \texttt{y <- 2:3}. What is produced by the expression \texttt{x + y}?  
+  \emph{an integer vector with the values 3, 5, 5, 7.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{; y} \hlkwb{<-} \hlnum{2}\hlopt{:}\hlnum{3}
+  \hlstd{x} \hlopt{+} \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+[1] 3 5 5 7
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item Suppose I have a vector \texttt{x <- c(3, 5, 1, 10, 12, 6)} and I want to set all elements of this vector that are less than \texttt{6} to be equal to zero. What \texttt{R} code achieves this?
+  \emph{You can create a logical vector with the expression \texttt{x < 6} and then use the \texttt{[} operator to subset the original vector \texttt{x}.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{12}\hlstd{,} \hlnum{6}\hlstd{)}
+  \hlstd{x[x} \hlopt{<} \hlnum{6}\hlstd{]} \hlkwb{<-} \hlnum{0}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+  \item In the dataset provided for this Quiz, what are the column names of the dataset?
+  \emph{You can get the column names of a data frame with the \texttt{names()} function.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setwd}\hlstd{(}\hlstr{"/Users/Martin/Desktop/GitHub/datasciencecoursera"}\hlstd{)}
+\hlkwd{getwd}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+[1] "/Users/Martin/Desktop/GitHub/datasciencecoursera"
+\end{verbatim}
+\begin{alltt}
+\hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"hw1_data.csv"}\hlstd{)}
+\hlkwd{names}\hlstd{(data)}
+\end{alltt}
+\begin{verbatim}
+[1] "Ozone"   "Solar.R" "Wind"    "Temp"    "Month"   "Day"    
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item Extract the first 2 rows of the data frame and print them to the console. What does the output look like?
+  \emph{You can extract the first two rows using the \texttt{[} operator and an integer sequence to index the rows.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item How many observations (i.e. rows) are in this data frame?
+  \emph{You can use the \texttt{nrows()} function to compute the number of rows in a data frame.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(data)}
+\end{alltt}
+\begin{verbatim}
+[1] 153   6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item Extract the last 2 rows of the data frame and print them to the console. What does the output look like?
+  \emph{The \texttt{tail()} function is an easy way to extract the last few elements of an R object.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{152}\hlopt{:}\hlnum{153}\hlstd{,]}
+\end{alltt}
+\begin{verbatim}
+    Ozone Solar.R Wind Temp Month Day
+152    18     131  8.0   76     9  29
+153    20     223 11.5   68     9  30
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+  \item What is the value of \texttt{Ozone} in the 47th row?
+  \emph{The single bracket \texttt{[} operator can be used to extract individual rows of a data frame.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{47}\hlstd{,} \hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 21
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \item How many missing values are in the \texttt{Ozone} column of this data frame?
+  \texttt{The \texttt{is.na} function can be used to test for missing values.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{na} \hlkwb{<-} \hlstd{data [}\hlnum{1}\hlstd{]}
+\hlkwd{sum}\hlstd{(}\hlkwd{is.na}\hlstd{(na))}
+\end{alltt}
+\begin{verbatim}
+[1] 37
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  \item What is the mean of the \texttt{Ozone} column in this dataset? Exclude missing values (coded as \texttt{NA}) from this calculation.
+  \emph{The \texttt{mean} function can be used to calculate the mean.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{bad} \hlkwb{<-} \hlkwd{is.na}\hlstd{(na)}
+\hlkwd{mean}\hlstd{(na[}\hlopt{!}\hlstd{bad])}
+\end{alltt}
+\begin{verbatim}
+[1] 42.12931
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  \item Extract the subset of rows of the data frame where \texttt{Ozone} values are above 31 and \texttt{Temp} values are above 90. What is the mean of \texttt{Solar.R} in this subset?
+  \emph{You need to construct a logical vector in \texttt{R} to match the question's requirements. Then use that logical vector to subset the data frame.}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Solar} \hlkwb{<-} \hlkwd{subset}\hlstd{(data, Ozone} \hlopt{>} \hlnum{31} \hlopt{&} \hlstd{Temp} \hlopt{>} \hlnum{90}\hlstd{,} \hlkwc{select} \hlstd{=} \hlkwd{c}\hlstd{(Solar.R))}
+\hlkwd{mean}\hlstd{(Solar[,}\hlnum{1}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+[1] 212.8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+  \item What is the mean of \texttt{Temp} when \texttt{Month} is equal to 6?
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Temp} \hlkwb{<-} \hlkwd{subset}\hlstd{(data, Month} \hlopt{==} \hlnum{6}\hlstd{,} \hlkwc{select} \hlstd{= Temp)}
+\hlkwd{mean}\hlstd{(Temp[,}\hlnum{1}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+[1] 79.1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  \item What was the maximum ozone value in the month of May (i.e. \texttt{Month} = 5)?
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{ozono} \hlkwb{<-} \hlkwd{subset}\hlstd{(data, Month} \hlopt{==} \hlnum{5}\hlstd{,} \hlkwc{select} \hlstd{= Ozone)}
+\hlkwd{max}\hlstd{(ozono,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 115
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    
+\end{enumerate}
+
+
+
+\end{document}
