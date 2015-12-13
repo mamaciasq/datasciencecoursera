@@ -17,7 +17,7 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
       getwd()
     @
 
-  \item Para ver los archivos  crpetas que hay en el directorio de trabajo actual:
+  \item Para ver los archivos  carpetas que hay en el directorio de trabajo actual:
     <<comment=NA>>=
       dir()
     @

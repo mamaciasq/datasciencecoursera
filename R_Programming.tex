@@ -73,18 +73,30 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
 \end{kframe}
 \end{knitrout}
 
-  \item Para ver los archivos  crpetas que hay en el directorio de trabajo actual:
+  \item Para ver los archivos  carpetas que hay en el directorio de trabajo actual:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
   \hlkwd{dir}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
- [1] "data.R"                    "datasciencecoursera.Rproj"
- [3] "HelloWorld.md"             "R Programming.Rnw"        
- [5] "R_Programming.bbl"         "R_Programming.pdf"        
- [7] "R_Programming.Rnw"         "R_Programming.tex"        
- [9] "README.md"                 "y.R"                      
+ [1] "data.R"                             
+ [2] "datasciencecoursera.Rproj"          
+ [3] "HelloWorld.md"                      
+ [4] "hw1_data.csv"                       
+ [5] "Quices"                             
+ [6] "R Programming.Rnw"                  
+ [7] "R_Programming.bbl"                  
+ [8] "R_Programming.pdf"                  
+ [9] "R_Programming.Rnw"                  
+[10] "R_Programming.tex"                  
+[11] "README.md"                          
+[12] "rprog-032_Basic_Building_Blocks.txt"
+[13] "rprog-032_Missing_Values.txt"       
+[14] "rprog-032_Sequences_of_Numbers.txt" 
+[15] "rprog-032_Vectors.txt"              
+[16] "rprog-032_Workspace_and_Files.txt"  
+[17] "y.R"                                
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1023,6 +1035,80 @@ NULL
 4    18     313 11.5   62     5   4
 7    23     299  8.6   65     5   7
 8    19      99 13.8   59     5   8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\section{Operaciones vectorizadas}
+Muchas operaciones en \texttt[R] son \textit{vectorizadas} volviendo el código más eficiente, conciso y fácil de leer.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{; y} \hlkwb{<-} \hlnum{6}\hlopt{:}\hlnum{9}
+  \hlstd{x} \hlopt{+} \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+[1]  7  9 11 13
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{>} \hlnum{2}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE  TRUE  TRUE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{>=} \hlnum{2}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE  TRUE  TRUE  TRUE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{y} \hlopt{==} \hlnum{8}
+\end{alltt}
+\begin{verbatim}
+[1] FALSE FALSE  TRUE FALSE
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{*} \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+[1]  6 14 24 36
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{/} \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+[1] 0.1666667 0.2857143 0.3750000 0.4444444
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+      
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{2}\hlstd{); y} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{4}\hlstd{),} \hlnum{2}\hlstd{,} \hlnum{2}\hlstd{)}
+  \hlstd{x} \hlopt{*} \hlstd{y}   \hlcom{## Multiplicación término a término}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2]
+[1,]   10   30
+[2,]   20   40
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{/} \hlstd{y}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2]
+[1,]  0.1  0.3
+[2,]  0.2  0.4
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlopt{%*%} \hlstd{y} \hlcom{## Multiplicación real de matrices}
+\end{alltt}
+\begin{verbatim}
+     [,1] [,2]
+[1,]   40   40
+[2,]   60   60
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
