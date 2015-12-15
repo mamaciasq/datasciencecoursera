@@ -1112,6 +1112,279 @@ Muchas operaciones en \texttt[R] son \textit{vectorizadas} volviendo el código 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-\section{Conclusion}
-``I always thought something was fundamentally wrong with the universe'' 
+
+\section{Estructuras de control}
+  \subsection{Introducción}
+  Las estructuras de control en \texttt{R} permiten controlar el flujo de ejecución del programa, dependiendo de las condiciones del tiempo de ejecución. Las estructuras más comunes son:
+  \begin{itemize}
+    \item \texttt{if, else}: para probar una condición
+    \item \texttt{for}: ejecuta un bucle un número fijo de veces
+    \item \texttt{while}: ejecuta un bucle 'mientras' una condición sea verdadera
+    \item \texttt{repeat}: ejecuta un bucle indefinidamentre
+    \item \texttt{break}: rompe la ejecución de un bucle
+    \item \texttt{next}: omite la interacción de un bucle
+    \item \texttt{return}: sale de una función
+  \end{itemize}
+
+  \subsection{\texttt{if-else}}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{if}(<condición>) \{
+\hlcom{          ## haga algo}
+  \} else \{
+\hlcom{          # haga algo más}
+  \}
+  \hlkwd{if}(<condición1>) \{
+\hlcom{          ## haga algo }
+  \} else \hlkwd{if} (<condición2>) \{
+\hlcom{          ## haga algo diferente}
+  \} else \{
+\hlcom{          ## haga algo diferente}
+  \}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+  Esta es una estructura \texttt{if/else} válida:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwa{if}\hlstd{(x}  \hlopt{>} \hlnum{3}\hlstd{) \{}
+          \hlstd{y} \hlkwb{<-} \hlnum{10}
+  \hlstd{\}} \hlkwa{else} \hlstd{\{}
+          \hlstd{y} \hlkwb{<-} \hlnum{0}
+  \hlstd{\}}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{Warning in if (x > 3) \{: the condition has length > 1 and only the first element will be used}}\end{kframe}
+\end{knitrout}
+
+  o esta:  
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{y} \hlkwb{<-} \hlkwa{if}\hlstd{(x}  \hlopt{>} \hlnum{3}\hlstd{) \{}
+          \hlnum{10}
+  \hlstd{\}} \hlkwa{else} \hlstd{\{}
+          \hlnum{0}
+  \hlstd{\}}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{Warning in if (x > 3) \{: the condition has length > 1 and only the first element will be used}}\end{kframe}
+\end{knitrout}
+
+  Obviamente, \texttt{else} no es estrictamente necesario:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{if}(<condición1>) \{
+
+  \} 
+  \hlkwd{if}(<condición2>) \{
+
+  \}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Bucles \texttt{for}}
+  Los bucles \texttt{for} toma una variable iteradora a quien le es asignada valores sucesivos de un vector o una secuencia. Los bucles \texttt{for} son comúnmente usados para iterar sobre los elementos de un objeto (lista, vector, etc.)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{10}\hlstd{)\{}
+    \hlkwd{print}\hlstd{(i)}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  Este bucle toma la variable \texttt{i} y en cada iteración del bucle le da el valor de 1, 2, 3, $\ldots$, 10 y luego sale del bucle.
+  
+  Los siguentes tres bucles hacen lo mismo:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlstr{"c"}\hlstd{,} \hlstr{"d"}\hlstd{)}
+
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{)\{}
+    \hlkwd{print}\hlstd{(x[i])}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+\end{verbatim}
+\begin{alltt}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlkwd{seq_along}\hlstd{(x))\{}
+    \hlkwd{print}\hlstd{(x[i])}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+\end{verbatim}
+\begin{alltt}
+  \hlkwa{for}\hlstd{(letter} \hlkwa{in} \hlstd{x)\{}
+    \hlkwd{print}\hlstd{(letter)}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+\end{verbatim}
+\begin{alltt}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{)} \hlkwd{print}\hlstd{(x[i])}
+\end{alltt}
+\begin{verbatim}
+[1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  Los bucles \texttt{for} pueden estar anidados
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{matrix} \hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{)}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlkwd{seq_len}\hlstd{(}\hlkwd{nrow}\hlstd{(x)))\{}
+    \hlkwa{for}\hlstd{(j} \hlkwa{in} \hlkwd{seq_len}\hlstd{(}\hlkwd{ncol}\hlstd{(x)))\{}
+      \hlkwd{print}\hlstd{(x[i, j])}
+    \hlstd{\}}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] 1
+[1] 3
+[1] 5
+[1] 2
+[1] 4
+[1] 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  Hay que tener cuidado con los bucles anidados. Anidar más allá de dos o tres pasos muchas veces difícil de leer o entender.
+  
+  \subsection{Bucles \texttt{while}}
+  Los bucles \texttt{while} comienzan con una condición a evaluar. Si la condición es cierta, ejecutan un cuerpo del bucle. Una vez ese cuerpo es ejecutado, la condición es evaluada nuevamente, etc.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{count} \hlkwb{<-} \hlnum{0}
+  \hlkwa{while}\hlstd{(count} \hlopt{<} \hlnum{10}\hlstd{)\{}
+    \hlkwd{print}\hlstd{(count)}
+    \hlstd{count} \hlkwb{<-} \hlstd{count} \hlopt{+} \hlnum{1}
+  \hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+[1] 0
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Los bucles \texttt{while} pueden resultar potencialmente en bucles infinitos si no se escriben apropiadamente. Hay que usarlo con cuidado.
+
+Puede haber más de una condición para evaluar.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{z} \hlkwb{<-} \hlnum{5}
+  \hlkwa{while}\hlstd{(z} \hlopt{>=} \hlnum{3} \hlopt{&&} \hlstd{z} \hlopt{<=} \hlnum{10}\hlstd{)\{}
+    \hlkwd{print}\hlstd{(z)}
+    \hlstd{coin} \hlkwb{<-} \hlkwd{rbinom}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.5}\hlstd{)}
+
+    \hlkwa{if}\hlstd{(coin} \hlopt{==} \hlnum{1}\hlstd{) \{} \hlcom{## caminata aleatoria}
+      \hlstd{z} \hlkwb{<-} \hlstd{z} \hlopt{+} \hlnum{1}
+    \hlstd{\}} \hlkwa{else} \hlstd{\{}
+      \hlstd{z} \hlkwb{<-} \hlstd{z} \hlopt{-} \hlnum{1}
+    \hlstd{\}}
+  \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  Las condiciones siempre se evalúan de izquierda a derecha.
+  
+  \subsection{\texttt{repeat}, \texttt{next} y \texttt{break}}
+    \subsubsection{\texttt{repeat}}
+    \texttt{repeat} inicia un bucle infinito; esto no se utiliza usualmente en aplicaciones estadísticas pero sí tienen sus usos. La única forma de salir de un \texttt{repeat} es llamar un \texttt{break}.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x0} \hlkwb{<-} \hlnum{1}
+  \hlstd{tol} \hlkwb{<-} \hlnum{1e-8}
+  \hlkwa{repeat} \hlstd{\{}
+    \hlstd{x1} \hlkwb{<-} \hlkwd{computeEstimate}\hlstd{()}
+
+    \hlkwa{if}\hlstd{(}\hlkwd{abs}\hlstd{(x1} \hlopt{-} \hlstd{x0)} \hlopt{<} \hlstd{tol) \{}
+      \hlkwa{break}
+    \hlstd{\}} \hlkwa{else} \hlstd{\{}
+      \hlstd{x0} \hlkwb{<-} \hlstd{x1}
+    \hlstd{\}}
+  \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+    \subsubsection{\texttt{next, return}}
+    \texttt{next} se usa para salir de la iteración de un bucle
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+    \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{100}\hlstd{) \{}
+      \hlkwa{if}\hlstd{(i} \hlopt{<=} \hlnum{20}\hlstd{)\{}
+        \hlcom{## Salta las primeras 20 iteraciones}
+        \hlkwa{next}
+      \hlstd{\}}
+      \hlcom{## Haga algo aquí}
+    \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \texttt{return} señala que una función debe salir y regresar a un valor dado.
+    
+  \subsection{Resumen de estructuras de control}
+  \begin{itemize}
+    \item Las estructuras de control como \texttt{if}, \texttt{while} y \texttt{for} permiten controlar el flujo de un programa en \texttt{R}
+    \item Los bucles infinitos deben evitarse aún si son teóricamente correctos.
+    \item Las estructuras de control mencionadas son principalmente utilizadas para escribir programas; para trabajar interactivamente líneas de comando, las funciones \texttt{*apply} son más utilizadas.
+  \end{itemize}
+
+    
+
+
+
+
 \end{document}

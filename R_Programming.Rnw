@@ -429,6 +429,178 @@ Muchas operaciones en \texttt[R] son \textit{vectorizadas} volviendo el código 
         x / y
         x %*% y ## Multiplicación real de matrices
       @
-\section{Conclusion}
-``I always thought something was fundamentally wrong with the universe'' 
+
+\section{Estructuras de control}
+  \subsection{Introducción}
+  Las estructuras de control en \texttt{R} permiten controlar el flujo de ejecución del programa, dependiendo de las condiciones del tiempo de ejecución. Las estructuras más comunes son:
+  \begin{itemize}
+    \item \texttt{if, else}: para probar una condición
+    \item \texttt{for}: ejecuta un bucle un número fijo de veces
+    \item \texttt{while}: ejecuta un bucle 'mientras' una condición sea verdadera
+    \item \texttt{repeat}: ejecuta un bucle indefinidamentre
+    \item \texttt{break}: rompe la ejecución de un bucle
+    \item \texttt{next}: omite la interacción de un bucle
+    \item \texttt{return}: sale de una función
+  \end{itemize}
+
+  \subsection{\texttt{if-else}}
+  <<comment = NA, eval = F>>=
+    if(<condición>) {
+            ## haga algo
+    } else {
+            # haga algo más
+    }
+    if(<condición1>) {
+            ## haga algo 
+    } else if (<condición2>) {
+            ## haga algo diferente
+    } else {
+            ## haga algo diferente
+    }
+  @
+
+  Esta es una estructura \texttt{if/else} válida:
+  <<include = FALSE, cache = FALSE>>=
+  muffleError <- function (x, options) {}
+  knit_hooks$set(error=muffleError)
+  @  
+  <<comment = NA>>=
+    if(x  > 3) {
+            y <- 10
+    } else {
+            y <- 0
+    }
+  @
+
+  o esta:  
+  <<include = FALSE, cache = FALSE>>=
+  muffleError <- function (x, options) {}
+  knit_hooks$set(error=muffleError)
+  @
+  <<comment = NA>>=
+    y <- if(x  > 3) {
+            10
+    } else {
+            0
+    }
+  @
+
+  Obviamente, \texttt{else} no es estrictamente necesario:
+  <<comment = NA, eval = FALSE>>=
+    if(<condición1>) {
+
+    } 
+    if(<condición2>) {
+
+    }
+  @  
+
+  \subsection{Bucles \texttt{for}}
+  Los bucles \texttt{for} toma una variable iteradora a quien le es asignada valores sucesivos de un vector o una secuencia. Los bucles \texttt{for} son comúnmente usados para iterar sobre los elementos de un objeto (lista, vector, etc.)
+  <<comment = NA>>=
+    for(i in 1:10){
+      print(i)
+    }
+  @ 
+  Este bucle toma la variable \texttt{i} y en cada iteración del bucle le da el valor de 1, 2, 3, $\ldots$, 10 y luego sale del bucle.
+  
+  Los siguentes tres bucles hacen lo mismo:
+  <<comment = NA>>=
+    x <- c("a", "b", "c", "d")
+    
+    for(i in 1:4){
+      print(x[i])
+    }
+  
+    for(i in seq_along(x)){
+      print(x[i])
+    }
+    
+    for(letter in x){
+      print(letter)
+    }
+    
+    for(i in 1:4) print(x[i])
+  @ 
+  
+  Los bucles \texttt{for} pueden estar anidados
+  <<comment = NA>>=
+    x <- matrix (1:6, 2, 3)
+    for(i in seq_len(nrow(x))){
+      for(j in seq_len(ncol(x))){
+        print(x[i, j])
+      }
+    }
+  @ 
+  Hay que tener cuidado con los bucles anidados. Anidar más allá de dos o tres pasos muchas veces difícil de leer o entender.
+  
+  \subsection{Bucles \texttt{while}}
+  Los bucles \texttt{while} comienzan con una condición a evaluar. Si la condición es cierta, ejecutan un cuerpo del bucle. Una vez ese cuerpo es ejecutado, la condición es evaluada nuevamente, etc.
+  <<comment = NA>>=
+    count <- 0
+    while(count < 10){
+      print(count)
+      count <- count + 1
+    }
+  @
+Los bucles \texttt{while} pueden resultar potencialmente en bucles infinitos si no se escriben apropiadamente. Hay que usarlo con cuidado.
+
+Puede haber más de una condición para evaluar.
+  <<comment = NA, eval = FALSE>>=
+    z <- 5
+    while(z >= 3 && z <= 10){
+      print(z)
+      coin <- rbinom(1, 1, 0.5)
+      
+      if(coin == 1) { ## caminata aleatoria
+        z <- z + 1
+      } else {
+        z <- z - 1
+      }
+    }
+  @
+  Las condiciones siempre se evalúan de izquierda a derecha.
+  
+  \subsection{\texttt{repeat}, \texttt{next} y \texttt{break}}
+    \subsubsection{\texttt{repeat}}
+    \texttt{repeat} inicia un bucle infinito; esto no se utiliza usualmente en aplicaciones estadísticas pero sí tienen sus usos. La única forma de salir de un \texttt{repeat} es llamar un \texttt{break}.
+  <<comment = NA, eval = FALSE>>=
+    x0 <- 1
+    tol <- 1e-8
+    repeat {
+      x1 <- computeEstimate()
+      
+      if(abs(x1 - x0) < tol) {
+        break
+      } else {
+        x0 <- x1
+      }
+    }
+  @
+
+    \subsubsection{\texttt{next, return}}
+    \texttt{next} se usa para salir de la iteración de un bucle
+    <<comment = NA>>=
+        for(i in 1:100) {
+          if(i <= 20){
+            ## Salta las primeras 20 iteraciones
+            next
+          }
+          ## Haga algo aquí
+        }
+    @
+    \texttt{return} señala que una función debe salir y regresar a un valor dado.
+    
+  \subsection{Resumen de estructuras de control}
+  \begin{itemize}
+    \item Las estructuras de control como \texttt{if}, \texttt{while} y \texttt{for} permiten controlar el flujo de un programa en \texttt{R}
+    \item Los bucles infinitos deben evitarse aún si son teóricamente correctos.
+    \item Las estructuras de control mencionadas son principalmente utilizadas para escribir programas; para trabajar interactivamente líneas de comando, las funciones \texttt{*apply} son más utilizadas.
+  \end{itemize}
+
+    
+
+
+
+
 \end{document}
