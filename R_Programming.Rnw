@@ -598,9 +598,97 @@ Puede haber más de una condición para evaluar.
     \item Las estructuras de control mencionadas son principalmente utilizadas para escribir programas; para trabajar interactivamente líneas de comando, las funciones \texttt{*apply} son más utilizadas.
   \end{itemize}
 
-    
+\section{Primeras funciones en \texttt{R}}
+
+A continuación algunas funciones que se escribieron inicialmente en \texttt{R}:\\
+
+Una simple función que recibe dos objetos y los suma
+  <<comment = NA>>=
+  add2 <- function(x, y) {
+      x + y
+  }
+  @
+
+Una función que recibe un objeto, evalúa si lo que compone este objeto tiene componentes mayores a 10 y luego arroja aquellos componentes mayores a 10   
+  <<comment = NA>>=
+  above10 <- function(x){
+        use <- x > 10
+        x[use]
+  }
+  @
+
+La misma función anterior pero ahora el usuario deberá suministrar el objeto y el número al cual debe evaluarse
+  <<comment = NA>>=
+  above <- function(x, n){
+    use <- x > n
+    x[use]
+  }
+  @
+
+Esta función evaluará el promedio de cada columna de un objeto dado.
+  <<comment = NA>>=
+  columnmean <- function(y) {
+    nc <- ncol(y)
+    means <- numeric(nc)
+      for(i in 1:nc) {
+        means[i] <- mean(y[, i])
+      }
+    means
+  }
+  @
+
+La misma función anterior sólo que omitiremos los \texttt{NA} para que pueda evaluarse.
+  <<comment = NA>>=
+  columnmean2 <- function(y, removeNA = TRUE) {
+    nc <- ncol(y)
+    means <- numeric(nc)
+      for(i in 1:nc) {
+      means[i] <- mean(y[, i], na.rm = removeNA)
+      }
+    means
+  }
+  @
+
+\section{Funciones en \texttt{R}}
+Las funciones se crean con la directiva \texttt{function()} y se guardan como objetos de \texttt{R}. En particular, son objetos de \texttt{R} de clase "function".
+  <<comment = NA, eval = FALSE>>=
+  f <- function(<argumentos>) {
+    ## Que haga algo  
+  }
+  @ 
+
+Las funciones en \texttt{R} son "objetos de primera clase", que significa que pueden ser tratados como cualquier otro objeto \texttt{R}. Principalmente,
+  \begin{itemize}
+    \item Las funciones pueden pasar como argumentos de otras funciones
+    \item Las funciones pueden estar anidadas, es decir que es posible definir una función dentro de otra función. El valor que entrega una función es la última expresión en el cuerpo de la función a ser evaluada.
+  \end{itemize}
+
+  \subsection{Argumentos de las funciones}
+  Las funciones tienen \emph{argumentos de nombre} los cuales potencialmente tienen \emph{valores por defecto}.
+  \begin{itemize}
+    \item Los \emph{argumentos formales} son los argumentos incluidos en la definición de la función.
+    \item la función \texttt{formals} devuelve una lista de todos los argumentos formales de una función.
+    \item No todas las funciones llamadas en R hacen uso de todos los argumentos formales
+    \item Los argumentos de las funciones pueden estar \emph{perdidas} o quizás tengan valores por defecto.
+  \end{itemize}
+  
+  \subsection{Argumentos coincidentes}
+  Los argumentos de las funciones en \texttt{R} pueden coincidir en posición o en nombre. Por ende, los siguientes llamados a \texttt{sd} son todas equivalentes
+  <<comment = NA, eval = FALSE>>=
+    mydata <- rnorm(100)
+    sd(mydata)
+    sd(x = mydata)
+    sd(x = mydata, na.rm = FALSE)
+    sd(na.rm = FALSE, x = mydata)
+    sd(na.rm = FALSE, mydata)
+  @
+  
+  A pesar de que esto sea posible, no es recomendable manejar las funciones desordenadamente por lo que, naturalmente, causará confusión.
 
 
-
+Es posible combinar coincidencias posicionales con coincidencias por nombre. Cuando un argumento is coincidido por nombre, éste es "sacado" de la lista de argumentos y los argumentos sin nombrar restantes se coinciden en el orden en que ellos están listados en la definición de la función.
+  <<comment = NA>>=
+    args(lm)
+  @
 
 \end{document}
