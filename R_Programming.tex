@@ -1384,6 +1384,7 @@ Puede haber más de una condición para evaluar.
   \end{itemize}
 
 \section{Primeras funciones en \texttt{R}}
+<<<<<<< HEAD
 
 A continuación algunas funciones que se escribieron inicialmente en \texttt{R}:\\
 
@@ -1438,6 +1439,62 @@ Esta función evaluará el promedio de cada columna de un objeto dado.
 \end{kframe}
 \end{knitrout}
 
+=======
+
+A continuación algunas funciones que se escribieron inicialmente en \texttt{R}:\\
+
+Una simple función que recibe dos objetos y los suma
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{add2} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{y}\hlstd{) \{}
+    \hlstd{x} \hlopt{+} \hlstd{y}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Una función que recibe un objeto, evalúa si lo que compone este objeto tiene componentes mayores a 10 y luego arroja aquellos componentes mayores a 10   
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{above10} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)\{}
+      \hlstd{use} \hlkwb{<-} \hlstd{x} \hlopt{>} \hlnum{10}
+      \hlstd{x[use]}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+La misma función anterior pero ahora el usuario deberá suministrar el objeto y el número al cual debe evaluarse
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{above} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{n}\hlstd{)\{}
+  \hlstd{use} \hlkwb{<-} \hlstd{x} \hlopt{>} \hlstd{n}
+  \hlstd{x[use]}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Esta función evaluará el promedio de cada columna de un objeto dado.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{columnmean} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{y}\hlstd{) \{}
+  \hlstd{nc} \hlkwb{<-} \hlkwd{ncol}\hlstd{(y)}
+  \hlstd{means} \hlkwb{<-} \hlkwd{numeric}\hlstd{(nc)}
+    \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nc) \{}
+      \hlstd{means[i]} \hlkwb{<-} \hlkwd{mean}\hlstd{(y[, i])}
+    \hlstd{\}}
+  \hlstd{means}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+>>>>>>> 1ed43ad379b5fc490bc47c16b50adc7c3917a80f
 La misma función anterior sólo que omitiremos los \texttt{NA} para que pueda evaluarse.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -1471,6 +1528,8 @@ Las funciones en \texttt{R} son "objetos de primera clase", que significa que pu
     \item Las funciones pueden pasar como argumentos de otras funciones
     \item Las funciones pueden estar anidadas, es decir que es posible definir una función dentro de otra función. El valor que entrega una función es la última expresión en el cuerpo de la función a ser evaluada.
   \end{itemize}
+<<<<<<< HEAD
+=======
 
   \subsection{Argumentos de las funciones}
   Las funciones tienen \emph{argumentos de nombre} los cuales potencialmente tienen \emph{valores por defecto}.
@@ -1513,5 +1572,208 @@ NULL
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+>>>>>>> 1ed43ad379b5fc490bc47c16b50adc7c3917a80f
 
+  \subsection{Argumentos de las funciones}
+  Las funciones tienen \emph{argumentos de nombre} los cuales potencialmente tienen \emph{valores por defecto}.
+  \begin{itemize}
+    \item Los \emph{argumentos formales} son los argumentos incluidos en la definición de la función.
+    \item la función \texttt{formals} devuelve una lista de todos los argumentos formales de una función.
+    \item No todas las funciones llamadas en R hacen uso de todos los argumentos formales
+    \item Los argumentos de las funciones pueden estar \emph{perdidas} o quizás tengan valores por defecto.
+  \end{itemize}
+  
+  \subsection{Argumentos coincidentes}
+  Los argumentos de las funciones en \texttt{R} pueden coincidir en posición o en nombre. Por ende, los siguientes llamados a \texttt{sd} son todas equivalentes
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{mydata} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{100}\hlstd{)}
+  \hlkwd{sd}\hlstd{(mydata)}
+  \hlkwd{sd}\hlstd{(}\hlkwc{x} \hlstd{= mydata)}
+  \hlkwd{sd}\hlstd{(}\hlkwc{x} \hlstd{= mydata,} \hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+  \hlkwd{sd}\hlstd{(}\hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{x} \hlstd{= mydata)}
+  \hlkwd{sd}\hlstd{(}\hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{, mydata)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  
+  A pesar de que esto sea posible, no es recomendable manejar las funciones desordenadamente por lo que, naturalmente, causará confusión.
+
+
+  Es posible combinar coincidencias posicionales con coincidencias por nombre. Cuando un argumento is coincidido por nombre, éste es "sacado" de la lista de argumentos y los argumentos sin nombrar restantes se coinciden en el orden en que ellos están listados en la definición de la función.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{args}\hlstd{(lm)}
+\end{alltt}
+\begin{verbatim}
+function (formula, data, subset, weights, na.action, method = "qr", 
+    model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
+    contrasts = NULL, offset, ...) 
+NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  Los siguientes dos llamados son similares:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{lm}\hlstd{(}\hlkwc{data} \hlstd{= mydata, y} \hlopt{-} \hlstd{x,} \hlkwc{model} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlnum{1}\hlopt{:}\hlnum{100}\hlstd{)}
+  \hlkwd{lm}\hlstd{(y} \hlopt{-} \hlstd{x, mydata,} \hlnum{1}\hlopt{:}\hlnum{100}\hlstd{,} \hlkwc{model} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  
+  \begin{itemize}
+    \item Muchas veces los argumentos de nombre son útiles  en la línea de comandos cuando se tiene una lista de argumentos larga y se pretende usar los valores por defecto de todo excepto por un argumento cercano al final de la lista.  
+    \item Los argumentos de nombre también son de ayuda si puede recordarse el nombre del argumento y no su posición en la lista de argumentos (plotting es un excelente ejemplo).
+\end{itemize}
+
+Los argumentos de las funciones también pueden ser parcialmente coincidentes, lo que es muy útil es trabajos interactivos. El orden de operaciones cuando un argumento es dado:
+    \begin{enumerate}
+      \item Revisa la coincidencia exacta para un argumento de nombre
+      \item Revisa una coincidencia parcial
+      \item Revisa una coincidencia de posición
+    \end{enumerate}
+
+  \subsection{Definiendo una función}
+  Además de no especificar un valor por defecto, también es posible asignarle a un argumento el valor \texttt{'NULL'}. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{f} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{,} \hlkwc{b} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{c} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{d} \hlstd{=} \hlkwa{NULL}\hlstd{)\{}
+
+  \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  
+  \subsection{Evaluación perezosa}
+  Los argumentos para funciones son evaluadas \emph{perezosamente}, es decir sólo cuando son necesarias.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{f} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{,} \hlkwc{b}\hlstd{)\{}
+    \hlstd{a}\hlopt{^}\hlnum{2}
+  \hlstd{\}}
+  \hlkwd{f}\hlstd{(}\hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  Esta función no usa el argumento \texttt{b}, de tal suerte que llamar \texttt{f(2)} no producirá un error por cuanto \texttt{2} quedará ubicado posicionalmente en \texttt{a}.  
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{f} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{,} \hlkwc{b}\hlstd{)\{}
+    \hlkwd{print}\hlstd{(a)}
+    \hlkwd{print}\hlstd{(b)}
+  \hlstd{\}}
+  \hlkwd{f}\hlstd{(}\hlnum{45}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 45
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  \subsection{El argumento "\dots"}
+  El argumento "\dots" indica un número variable de argumentos que usualmente se pasan a otras funciones.
+  \begin{itemize}
+    \item \dots se usa comúnmente cuando se extienden otras funciones y no se quiere copiar la lista entera de argumentos de la función original.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{myplot} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{y}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{...}\hlstd{)\{}
+    \hlkwd{plot}\hlstd{(x, y,} \hlkwc{type} \hlstd{= type, ...)}
+  \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \item Las funciones genéricas usan \dots, así esos argumentos extra se pasan a métodos.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{mean}
+\end{alltt}
+\begin{verbatim}
+function (x, ...) 
+UseMethod("mean")
+<bytecode: 0x7fa01d04b390>
+<environment: namespace:base>
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \end{itemize}
+
+  El argumento \dots también es necesario cuando el número de argumentos pasados a la función no se conoce previamente.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{args}\hlstd{(paste)}
+\end{alltt}
+\begin{verbatim}
+function (..., sep = " ", collapse = NULL) 
+NULL
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{args}\hlstd{(cat)}
+\end{alltt}
+\begin{verbatim}
+function (..., file = "", sep = " ", fill = FALSE, labels = NULL, 
+    append = FALSE) 
+NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  \subsection{Argumentos que vienen después del argumento "\dots"}
+  Una captura con \dots significa que cualquier argumento que aparezca después de \dots sobre la lista de argumentos debe ser llamados explícitamente y no puede ser parcialmente coincidido.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{args}\hlstd{(paste)}
+\end{alltt}
+\begin{verbatim}
+function (..., sep = " ", collapse = NULL) 
+NULL
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{paste}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{":"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] "a:b"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{paste}\hlstd{(}\hlstr{"a"}\hlstd{,} \hlstr{"b"}\hlstd{,} \hlkwc{se} \hlstd{=} \hlstr{":"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] "a b :"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\section{Reglas de ámbito}
+  \subsection{Símbolo de unión}
+    \subsubsection{Una desviación en valores de unión a símbolos}
+    ¿Cómo sabe \texttt{R} qué valor asignar a qué símbolo?
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{lm} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{x} \hlopt{*} \hlstd{x\}}
+  \hlstd{lm}
+\end{alltt}
+\begin{verbatim}
+function(x) {x * x}
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    ¿Cómo sabe \texttt{R} que valor asignar al símbolo \texttt{lm}¿ ¿Por qué no le da el valor de \texttt{lm} que está en la librería de \texttt{R}?
+
+  
+  
 \end{document}

@@ -781,7 +781,70 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
       \item Revisa una coincidencia de posición
     \end{enumerate}
 
+  \subsection{Definiendo una función}
+  Además de no especificar un valor por defecto, también es posible asignarle a un argumento el valor \texttt{'NULL'}. 
+  <<comment = NA, eval = FALSE>>=
+    f <- function(a, b = 1, c = 2, d = NULL){
+      
+    }
+  @ 
   
+  \subsection{Evaluación perezosa}
+  Los argumentos para funciones son evaluadas \emph{perezosamente}, es decir sólo cuando son necesarias.
+  <<comment = NA>>=
+    f <- function(a, b){
+      a^2
+    }
+    f(2)
+  @
+  Esta función no usa el argumento \texttt{b}, de tal suerte que llamar \texttt{f(2)} no producirá un error por cuanto \texttt{2} quedará ubicado posicionalmente en \texttt{a}.  
+  <<comment = NA>>=
+    f <- function(a, b){
+      print(a)
+      print(b)
+    }
+    f(45)
+  @
+  
+  \subsection{El argumento "\dots"}
+  El argumento "\dots" indica un número variable de argumentos que usualmente se pasan a otras funciones.
+  \begin{itemize}
+    \item \dots se usa comúnmente cuando se extienden otras funciones y no se quiere copiar la lista entera de argumentos de la función original.
+    <<comment = NA>>=
+      myplot <- function(x, y, type = "l", ...){
+        plot(x, y, type = type, ...)
+      }
+    @  
+    \item Las funciones genéricas usan \dots, así esos argumentos extra se pasan a métodos.
+    <<comment = NA>>=
+      mean
+    @    
+  \end{itemize}
+
+  El argumento \dots también es necesario cuando el número de argumentos pasados a la función no se conoce previamente.
+    <<comment = NA>>=
+      args(paste)
+      args(cat)
+    @
+  
+  \subsection{Argumentos que vienen después del argumento "\dots"}
+  Una captura con \dots significa que cualquier argumento que aparezca después de \dots sobre la lista de argumentos debe ser llamados explícitamente y no puede ser parcialmente coincidido.
+    <<comment = NA>>=
+      args(paste)
+      paste("a", "b", sep = ":")
+      paste("a", "b", se = ":")
+    @
+  
+\section{Reglas de ámbito}
+  \subsection{Símbolo de unión}
+    \subsubsection{Una desviación en valores de unión a símbolos}
+    ¿Cómo sabe \texttt{R} qué valor asignar a qué símbolo?
+    <<comment = NA>>=
+      lm <- function(x) {x * x}
+      lm
+    @
+    ¿Cómo sabe \texttt{R} que valor asignar al símbolo \texttt{lm}¿ ¿Por qué no le da el valor de \texttt{lm} que está en la librería de \texttt{R}?
+
   
   
 \end{document}
