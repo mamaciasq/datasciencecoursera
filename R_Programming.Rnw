@@ -843,7 +843,7 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
       lm <- function(x) {x * x}
       lm
     @
-    ¿Cómo sabe \texttt{R} que valor asignar al símbolo \texttt{lm}¿ ¿Por qué no le da el valor de \texttt{lm} que está en la librería de \texttt{R}?
+    ¿Cómo sabe \texttt{R} que valor asignar al símbolo \texttt{lm}? ¿Por qué no le da el valor de \texttt{lm} que está en la librería de \texttt{R}?
 
   
   
