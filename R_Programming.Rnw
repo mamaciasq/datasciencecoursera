@@ -845,6 +845,154 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
     @
     ¿Cómo sabe \texttt{R} que valor asignar al símbolo \texttt{lm}? ¿Por qué no le da el valor de \texttt{lm} que está en la librería de \texttt{R}?
 
-  
-  
+    Cuando \texttt{R} intenta enlazar un valor a un símbolo, busca a través de una serie de \texttt{entornos} para encontrar el valor apropiado. Cuando se está trabajando en la línea de comandos y se necesita recuperar el valor de un objeto en \texttt{R}, el orden es:
+
+    \begin{enumerate}
+      \item Buscar en el entorno global por un nombre de símbolo y compararlo con el solicitado.
+      \item Buscar en los espacios de nombres de cada uno de los paquetes en la lista de búsqueda
+    \end{enumerate}
+
+    La lista de búsqueda se puede encontrar utilizando la función \texttt{search}.
+    <<comment = NA>>=
+      search()
+    @
+    
+    \subsubsection{Valores de unión a símbolos}
+    \begin{itemize}
+      \item El \emph{entorno global} o espacio de trabajo del usuario siempre es el primer elemento de la lista de búsqueda y el paquete \emph{base} siempre es el último.
+      \item ¡El orden de los paquetes de la lista de búsqueda sí importa!
+      \item El usuario puede configurar qué paquetes deben cargarse en el arranque por lo que no puede asumirse que habrá una lista de paquetes disponibles.
+      \item Cuando un usuario carga un paquete con \texttt{library}, el espacio de nombres de ese paquete se pone en la segunda posición de la lista de búsqueda (por defecto) y todo lo demás se desplaza por la lista.
+      \item Tenga en cuenta que \texttt{R} tiene espacios de nombres distintos para las funciones y las que no lo son, por lo que es posible tener un objeto denominado \texttt{c} y una función también llamada \texttt{c}. 
+    \end{itemize}
+
+    \subsubsection{Reglas de ámbito}
+    Las reglas de ámbito de \texttt{R} son la principal característica que lo diferencia del lenguaje original \texttt{S}.
+    \begin{itemize}
+      \item Las reglas de ámbito determinan cómo un valor se asocia con una variable libre en una función
+      \item R utiliza \emph{ámbito léxico} o \emph{ámbito estático}. Una alternativa común es \emph{ámbito dinámico}.
+      \item R usa la búsqueda list para relacionar un valor con un símbolo mediante las reglas de ámbito.
+      \item El ámbito léxico resulta ser particularmente útil para simplificar los cálculos estadísticos 
+    \end{itemize}
+    
+    \subsubsection{Ámbito léxico}
+    Considere la siguiente función
+    <<comment = NA>>=
+      f <- function(x, y){
+        x^2 + y / z
+      }
+    @    
+    Esta función tiene dos argumentos formales \texttt{x} y \texttt{y}. En el cuerpo de la función hay otro símbolo, \texttt{z}. En este caso \texttt{z} se llama \emph{variable libre}. Las reglas de ámbito de un lenguaje determinan cómo se asignan valores a las variables libres. Las variables libres no son argumentos formales y no son variables locales (asignadas dentro del cuerpo de la función).\par
+    El ámbito léxico en \texttt{R} significa que \emph{los valores de las variables libres se buscan en el entorno al cual la función fue asignada}.\\ \par
+    ¿Qué es un environment?
+    \begin{itemize}
+      \item Un \emph{entorno} es una colección de parejas (símbolos, valores), es decir, \texttt{x} es un símbolo y \texttt{3.14} podría ser su valor.
+      \item Cada entorno tiene un entorno paterno; es posible para un entorno tener varios "hijos"
+      \item El único entorno sin un padre es el entorno de vacío
+      \item Una función + un ambiente = un \emph{cierre} o una \emph{función cierre}.
+    \end{itemize}
+    
+    Buscar el valor de una variable libre:
+    \begin{itemize}
+      \item Si el valor de un símbolo no se encuentra en el entorno en el que se define una función, entonces la búsqueda se continúa en el \emph{entorno paterno}.
+      \item La búsqueda continúa por la secuencia de los entornos paternos hasta alcanzar el entorno de nivel superior; esto, por lo general, el entorno global (espacio de trabajo) o el espacio de nombres de un paquete.
+      \item Después del entorno de nivel superior, la búsqueda continúa hacia abajo de la lista de búsqueda hasta llegar al entorno vacío. Si un valor para un símbolo dado no se puede encontrar una vez que se llega al entorno vacío, a continuación, se emite un error. 
+    \end{itemize}
+
+    \textbf{¿Para qué todo este asunto?}
+    \begin{itemize}
+      \item Por lo general, una función se define en el entorno global, por lo que los valores de variables libres solo se encuentran en el espacio de trabajo del usuario
+      \item Este comportamiento es lógico para la mayoría de las personas y es por lo general lo "correcto" para hacer
+      \item Sin embargo, en \texttt{R} puede haber funciones definidas dentro de otras funciones.
+      \begin{itemize}
+        \item Lenguajes como \texttt{C} no le permiten hacer esto
+      \end{itemize}
+      \item Ahora las cosas se ponen interesantes - En este caso, el entorno en el que se define una función es el cuerpo de otra función!
+    \end{itemize}
+    
+    <<comment = NA>>=
+      make.power <- function(n){
+        pow <- function(x){
+          x^n
+        }
+      }
+    @        
+
+    Esta función devuelve otra función como su valor
+    <<comment = NA>>=
+      cube <- make.power(3)
+      square <- make.power(2)
+      cube(3)
+      square(3)
+    @
+
+    \subsubsection{Explorando funciones cierre}
+    ¿Qué es el entorno de una función?
+    <<comment = NA>>=
+      ls(environment(cube))
+      get("n", environment(cube))
+      
+      ls(environment(square))
+      get("n", environment(square))
+    @    
+    
+    \subsubsection{Ámbito léxico vs. Dinámico}
+    <<comment = NA>>=
+      y <- 10
+      
+      f <- function(x) {
+        y <- 2
+        y^2 + g(x)
+      }
+
+      g <- function(x) { 
+        x*y
+      }
+    @
+    
+    Cuál es el valor de 
+    <<comment = NA>>=
+      f(3)
+    @
+
+    \begin{itemize}
+      \item Con ámbito léxico el valor de \texttt{y} en la función \texttt{g} se busca en el entorno en el que se define la función, en este caso el entorno global, por lo que el valor de \texttt{y} es 10.
+      \item Con ámbito dinámico, el valor de \texttt{y} se busca en el entorno del cual la función era \emph{llamada} (a veces referida como el \emph{entorno de llamado}).
+      \begin{itemize}
+        \item En \texttt{R} el entorno de llamado es conocido como \emph{marco paterno}.
+      \end{itemize}
+      \item Así que el valor de \texttt{y} sería 2.
+    \end{itemize}
+    
+    Cuando una función se define en el entorno global y es posteriormente llamada del entorno global, entonces el entorno de la definición y el entorno de la llamada son los mismos. Esto a veces puede dar la apariencia de alcance dinámico.
+    <<comment = NA>>=
+      g <- function(x) { 
+        a <- 3
+        x + a + y 
+      }
+      g(2)
+
+      y <- 3
+      g(2)
+    @
+
+    \subsubsection{Otros lenguajes}
+    Otros lenguajes que soportan ámbito léxico
+    \begin{itemize}
+      \item Scheme
+      \item Perl
+      \item Python
+      \item Common Lisp (todos los lenguajes convergen a Lisp)
+    \end{itemize}
+
+    \subsubsection{Consecuencias del ámbito léxico}
+    \begin{itemize}
+      \item  En \texttt{R} todos los objetos se deben almacenar en la memoria
+      \item Todas las funciones deben llevar un puntero a sus respectivos entornos de definición, que podría estar en cualquier lugar
+      \item En \texttt{S-PLUS}, las variables libres siempre miran hacia el espacio de trabajo global, por lo que todo se puede almacenar en el disco debido a que el "entorno de la definición" de todas las funciones es el mismo.
+    \end{itemize}
+
+
+
+
 \end{document}
