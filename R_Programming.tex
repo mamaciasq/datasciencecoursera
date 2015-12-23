@@ -1391,7 +1391,6 @@ Puede haber más de una condición para evaluar.
   \end{itemize}
 
 \section{Primeras funciones en \texttt{R}}
-<<<<<<< HEAD
 
 A continuación algunas funciones que se escribieron inicialmente en \texttt{R}:\\
 
@@ -1446,62 +1445,6 @@ Esta función evaluará el promedio de cada columna de un objeto dado.
 \end{kframe}
 \end{knitrout}
 
-=======
-
-A continuación algunas funciones que se escribieron inicialmente en \texttt{R}:\\
-
-Una simple función que recibe dos objetos y los suma
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{add2} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{y}\hlstd{) \{}
-    \hlstd{x} \hlopt{+} \hlstd{y}
-\hlstd{\}}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
-Una función que recibe un objeto, evalúa si lo que compone este objeto tiene componentes mayores a 10 y luego arroja aquellos componentes mayores a 10   
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{above10} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)\{}
-      \hlstd{use} \hlkwb{<-} \hlstd{x} \hlopt{>} \hlnum{10}
-      \hlstd{x[use]}
-\hlstd{\}}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
-La misma función anterior pero ahora el usuario deberá suministrar el objeto y el número al cual debe evaluarse
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{above} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{n}\hlstd{)\{}
-  \hlstd{use} \hlkwb{<-} \hlstd{x} \hlopt{>} \hlstd{n}
-  \hlstd{x[use]}
-\hlstd{\}}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
-Esta función evaluará el promedio de cada columna de un objeto dado.
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{columnmean} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{y}\hlstd{) \{}
-  \hlstd{nc} \hlkwb{<-} \hlkwd{ncol}\hlstd{(y)}
-  \hlstd{means} \hlkwb{<-} \hlkwd{numeric}\hlstd{(nc)}
-    \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nc) \{}
-      \hlstd{means[i]} \hlkwb{<-} \hlkwd{mean}\hlstd{(y[, i])}
-    \hlstd{\}}
-  \hlstd{means}
-\hlstd{\}}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
->>>>>>> 1ed43ad379b5fc490bc47c16b50adc7c3917a80f
 La misma función anterior sólo que omitiremos los \texttt{NA} para que pueda evaluarse.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -1535,8 +1478,6 @@ Las funciones en \texttt{R} son "objetos de primera clase", que significa que pu
     \item Las funciones pueden pasar como argumentos de otras funciones
     \item Las funciones pueden estar anidadas, es decir que es posible definir una función dentro de otra función. El valor que entrega una función es la última expresión en el cuerpo de la función a ser evaluada.
   \end{itemize}
-<<<<<<< HEAD
-=======
 
   \subsection{Argumentos de las funciones}
   Las funciones tienen \emph{argumentos de nombre} los cuales potencialmente tienen \emph{valores por defecto}.
@@ -1563,50 +1504,6 @@ Las funciones en \texttt{R} son "objetos de primera clase", que significa que pu
 \end{knitrout}
   
   A pesar de que esto sea posible, no es recomendable manejar las funciones desordenadamente por lo que, naturalmente, causará confusión.
-
-
-Es posible combinar coincidencias posicionales con coincidencias por nombre. Cuando un argumento is coincidido por nombre, éste es "sacado" de la lista de argumentos y los argumentos sin nombrar restantes se coinciden en el orden en que ellos están listados en la definición de la función.
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-  \hlkwd{args}\hlstd{(lm)}
-\end{alltt}
-\begin{verbatim}
-function (formula, data, subset, weights, na.action, method = "qr", 
-    model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
-    contrasts = NULL, offset, ...) 
-NULL
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
->>>>>>> 1ed43ad379b5fc490bc47c16b50adc7c3917a80f
-
-  \subsection{Argumentos de las funciones}
-  Las funciones tienen \emph{argumentos de nombre} los cuales potencialmente tienen \emph{valores por defecto}.
-  \begin{itemize}
-    \item Los \emph{argumentos formales} son los argumentos incluidos en la definición de la función.
-    \item la función \texttt{formals} devuelve una lista de todos los argumentos formales de una función.
-    \item No todas las funciones llamadas en R hacen uso de todos los argumentos formales
-    \item Los argumentos de las funciones pueden estar \emph{perdidas} o quizás tengan valores por defecto.
-  \end{itemize}
-  
-  \subsection{Argumentos coincidentes}
-  Los argumentos de las funciones en \texttt{R} pueden coincidir en posición o en nombre. Por ende, los siguientes llamados a \texttt{sd} son todas equivalentes
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-  \hlstd{mydata} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{100}\hlstd{)}
-  \hlkwd{sd}\hlstd{(mydata)}
-  \hlkwd{sd}\hlstd{(}\hlkwc{x} \hlstd{= mydata)}
-  \hlkwd{sd}\hlstd{(}\hlkwc{x} \hlstd{= mydata,} \hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{)}
-  \hlkwd{sd}\hlstd{(}\hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{x} \hlstd{= mydata)}
-  \hlkwd{sd}\hlstd{(}\hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{, mydata)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-  
-  A pesar de que esto sea posible, no es recomendable manejar las funciones desordenadamente por lo que, naturalmente, causará confusión.
-
 
   Es posible combinar coincidencias posicionales con coincidencias por nombre. Cuando un argumento is coincidido por nombre, éste es "sacado" de la lista de argumentos y los argumentos sin nombrar restantes se coinciden en el orden en que ellos están listados en la definición de la función.
 \begin{knitrout}
@@ -1710,7 +1607,7 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
 \begin{verbatim}
 function (x, ...) 
 UseMethod("mean")
-<bytecode: 0x7f8f93225a30>
+<bytecode: 0x7ffbf3a0fd18>
 <environment: namespace:base>
 \end{verbatim}
 \end{kframe}
@@ -2046,7 +1943,7 @@ function(p) {
       b <- -0.5 * sum((data - mu)^2) / (sigma^2) 
       - (a + b)
     }
-<environment: 0x7f8f9407c208>
+<environment: 0x7ffbf61e74e0>
 \end{verbatim}
 \begin{alltt}
   \hlkwd{ls}\hlstd{(}\hlkwd{environment}\hlstd{(nLL))}
@@ -2105,7 +2002,7 @@ function(p) {
 \hlkwd{plot}\hlstd{(x,} \hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{(y} \hlopt{-} \hlkwd{min}\hlstd{(y))),} \hlkwc{type} \hlstd{=} \hlstr{'l'}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-87-1} 
 \begin{kframe}\begin{alltt}
 \hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals,} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{2}\hlstd{))}
 \hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{1.5}\hlstd{,} \hlkwc{len} \hlstd{=} \hlnum{100}\hlstd{)}
@@ -2113,7 +2010,7 @@ function(p) {
 \hlkwd{plot}\hlstd{(x,} \hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{(y} \hlopt{-} \hlkwd{min}\hlstd{(y))),} \hlkwc{type} \hlstd{=} \hlstr{'l'}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-2} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-87-2} 
 
 \end{knitrout}
     
@@ -2191,7 +2088,7 @@ function(p) {
   \hlstd{x}
 \end{alltt}
 \begin{verbatim}
-[1] "2015-12-22 23:46:41 COT"
+[1] "2015-12-23 12:09:04 COT"
 \end{verbatim}
 \begin{alltt}
   \hlstd{p} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(x)}
@@ -2205,7 +2102,7 @@ function(p) {
   \hlstd{p}\hlopt{$}\hlstd{sec}
 \end{alltt}
 \begin{verbatim}
-[1] 41.14729
+[1] 4.940765
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2218,13 +2115,13 @@ function(p) {
   \hlstd{x} \hlcom{## Ya en formato 'POSIXct'}
 \end{alltt}
 \begin{verbatim}
-[1] "2015-12-22 23:46:41 COT"
+[1] "2015-12-23 12:09:04 COT"
 \end{verbatim}
 \begin{alltt}
   \hlkwd{unclass}\hlstd{(x)}
 \end{alltt}
 \begin{verbatim}
-[1] 1450846001
+[1] 1450890545
 \end{verbatim}
 \begin{alltt}
   \hlstd{x}\hlopt{$}\hlstd{sec}
@@ -2232,7 +2129,7 @@ function(p) {
   \hlstd{p}\hlopt{$}\hlstd{sec}
 \end{alltt}
 \begin{verbatim}
-[1] 41.18513
+[1] 4.975246
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
