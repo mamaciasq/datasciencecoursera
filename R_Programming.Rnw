@@ -1140,7 +1140,7 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
     x-y
   @
 
-  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias
+  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias 
   <<comment = NA>>=
     x <- as.Date("2012-03-01") 
     y <- as.Date("2012-02-28") 
@@ -1150,6 +1150,13 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
     y-x
   @
 
+  \subsection{Resumen}
+  \begin{itemize}
+    \item Las fechas y horas tienen clases especiales en \texttt{R} que permiten cálculos numéricos y estadísticos
+- Las fechas utilizan la clase \texttt{Date}
+- Las horas usan las clases \texttt{POSIXct} y \texttt{POSIXlt}
+- Las cadenas de caracteres pueden ser obligadas a convertirse en clases fecha u hora utilizando las funciones \texttt{strptime}, \texttt{as.Date}, \texttt{as.POSIXlt} o \texttt{as.POSIXct}. 
+  \end{itemize}
 
 
 

@@ -82,24 +82,29 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
 \begin{verbatim}
  [1] "data.R"                             
  [2] "datasciencecoursera.Rproj"          
- [3] "figure"                             
- [4] "functions.R"                        
- [5] "HelloWorld.md"                      
- [6] "hw1_data.csv"                       
- [7] "Quices"                             
- [8] "R Programming.Rnw"                  
- [9] "R_Programming.bbl"                  
-[10] "R_Programming.pdf"                  
-[11] "R_Programming.Rnw"                  
-[12] "R_Programming.tex"                  
-[13] "README.md"                          
-[14] "rprog-032_Basic_Building_Blocks.txt"
-[15] "rprog-032_Missing_Values.txt"       
-[16] "rprog-032_Sequences_of_Numbers.txt" 
-[17] "rprog-032_Subsetting_Vectors.txt"   
-[18] "rprog-032_Vectors.txt"              
-[19] "rprog-032_Workspace_and_Files.txt"  
-[20] "y.R"                                
+ [3] "diet_data"                          
+ [4] "diet_data.zip"                      
+ [5] "figure"                             
+ [6] "functions.R"                        
+ [7] "HelloWorld.md"                      
+ [8] "hw1_data.csv"                       
+ [9] "Programming Assignments"            
+[10] "Quices"                             
+[11] "R Programming.Rnw"                  
+[12] "R_Programming.bbl"                  
+[13] "R_Programming.pdf"                  
+[14] "R_Programming.Rnw"                  
+[15] "R_Programming.tex"                  
+[16] "README.md"                          
+[17] "rprog-032_Basic_Building_Blocks.txt"
+[18] "rprog-032_Missing_Values.txt"       
+[19] "rprog-032_Sequences_of_Numbers.txt" 
+[20] "rprog-032_Subsetting_Vectors.txt"   
+[21] "rprog-032_Vectors.txt"              
+[22] "rprog-032_Workspace_and_Files.txt"  
+[23] "specdata"                           
+[24] "specdata.zip"                       
+[25] "y.R"                                
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1705,7 +1710,7 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
 \begin{verbatim}
 function (x, ...) 
 UseMethod("mean")
-<bytecode: 0x7fb6dac92308>
+<bytecode: 0x7f8f93225a30>
 <environment: namespace:base>
 \end{verbatim}
 \end{kframe}
@@ -2041,7 +2046,7 @@ function(p) {
       b <- -0.5 * sum((data - mu)^2) / (sigma^2) 
       - (a + b)
     }
-<environment: 0x7fb6da715f50>
+<environment: 0x7f8f9407c208>
 \end{verbatim}
 \begin{alltt}
   \hlkwd{ls}\hlstd{(}\hlkwd{environment}\hlstd{(nLL))}
@@ -2186,7 +2191,7 @@ function(p) {
   \hlstd{x}
 \end{alltt}
 \begin{verbatim}
-[1] "2015-12-22 18:39:54 COT"
+[1] "2015-12-22 23:46:41 COT"
 \end{verbatim}
 \begin{alltt}
   \hlstd{p} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(x)}
@@ -2200,7 +2205,7 @@ function(p) {
   \hlstd{p}\hlopt{$}\hlstd{sec}
 \end{alltt}
 \begin{verbatim}
-[1] 54.18555
+[1] 41.14729
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2213,13 +2218,13 @@ function(p) {
   \hlstd{x} \hlcom{## Ya en formato 'POSIXct'}
 \end{alltt}
 \begin{verbatim}
-[1] "2015-12-22 18:39:54 COT"
+[1] "2015-12-22 23:46:41 COT"
 \end{verbatim}
 \begin{alltt}
   \hlkwd{unclass}\hlstd{(x)}
 \end{alltt}
 \begin{verbatim}
-[1] 1450827594
+[1] 1450846001
 \end{verbatim}
 \begin{alltt}
   \hlstd{x}\hlopt{$}\hlstd{sec}
@@ -2227,7 +2232,7 @@ function(p) {
   \hlstd{p}\hlopt{$}\hlstd{sec}
 \end{alltt}
 \begin{verbatim}
-[1] 54.22062
+[1] 41.18513
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2274,7 +2279,7 @@ Time difference of 356.3095 days
 \end{kframe}
 \end{knitrout}
 
-  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias
+  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -2296,6 +2301,13 @@ Time difference of 0 secs
 \end{kframe}
 \end{knitrout}
 
+  \subsection{Resumen}
+  \begin{itemize}
+    \item Las fechas y horas tienen clases especiales en \texttt{R} que permiten cálculos numéricos y estadísticos
+- Las fechas utilizan la clase \texttt{Date}
+- Las horas usan las clases \texttt{POSIXct} y \texttt{POSIXlt}
+- Las cadenas de caracteres pueden ser obligadas a convertirse en clases fecha u hora utilizando las funciones \texttt{strptime}, \texttt{as.Date}, \texttt{as.POSIXlt} o \texttt{as.POSIXct}. 
+  \end{itemize}
 
 
 
