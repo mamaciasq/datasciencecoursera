@@ -82,23 +82,24 @@ La idea es hacer el seguimiento de los comandos en \texttt{R} para establecer el
 \begin{verbatim}
  [1] "data.R"                             
  [2] "datasciencecoursera.Rproj"          
- [3] "functions.R"                        
- [4] "HelloWorld.md"                      
- [5] "hw1_data.csv"                       
- [6] "Quices"                             
- [7] "R Programming.Rnw"                  
- [8] "R_Programming.bbl"                  
- [9] "R_Programming.pdf"                  
-[10] "R_Programming.Rnw"                  
-[11] "R_Programming.tex"                  
-[12] "README.md"                          
-[13] "rprog-032_Basic_Building_Blocks.txt"
-[14] "rprog-032_Missing_Values.txt"       
-[15] "rprog-032_Sequences_of_Numbers.txt" 
-[16] "rprog-032_Subsetting_Vectors.txt"   
-[17] "rprog-032_Vectors.txt"              
-[18] "rprog-032_Workspace_and_Files.txt"  
-[19] "y.R"                                
+ [3] "figure"                             
+ [4] "functions.R"                        
+ [5] "HelloWorld.md"                      
+ [6] "hw1_data.csv"                       
+ [7] "Quices"                             
+ [8] "R Programming.Rnw"                  
+ [9] "R_Programming.bbl"                  
+[10] "R_Programming.pdf"                  
+[11] "R_Programming.Rnw"                  
+[12] "R_Programming.tex"                  
+[13] "README.md"                          
+[14] "rprog-032_Basic_Building_Blocks.txt"
+[15] "rprog-032_Missing_Values.txt"       
+[16] "rprog-032_Sequences_of_Numbers.txt" 
+[17] "rprog-032_Subsetting_Vectors.txt"   
+[18] "rprog-032_Vectors.txt"              
+[19] "rprog-032_Workspace_and_Files.txt"  
+[20] "y.R"                                
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1704,7 +1705,7 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
 \begin{verbatim}
 function (x, ...) 
 UseMethod("mean")
-<bytecode: 0x7fd19e3e0c60>
+<bytecode: 0x7fb6dac92308>
 <environment: namespace:base>
 \end{verbatim}
 \end{kframe}
@@ -1993,10 +1994,321 @@ function(x) {x * x}
     \begin{itemize}
       \item  En \texttt{R} todos los objetos se deben almacenar en la memoria
       \item Todas las funciones deben llevar un puntero a sus respectivos entornos de definición, que podría estar en cualquier lugar
-      \item En \texttt{S-PLUS}, las variables libres siempre miran hacia  el espacio de trabajo global, por lo que todo se puede almacenar en el disco debido a que el "entorno de la definición" de todas las funciones es el mismo.
+      \item En \texttt{S-PLUS}, las variables libres siempre miran hacia el espacio de trabajo global, por lo que todo se puede almacenar en el disco debido a que el "entorno de la definición" de todas las funciones es el mismo.
     \end{itemize}
+
+  \subsection{Aplicación: Optimización}
+  ¿Por qué es útil esta información?
+  \begin{itemize}
+    \item Las rutinas de optimización en \texttt{R} como \texttt{optim}, \texttt{nlm} y \texttt{optimize} requiere pasar a una función cuyo argumento sea un vector de parámetros (ej. log-verosimilitud)
+    \item Sin embargo, una función objeto puede depender de una serie de variables distintas a sus parámetros (como \texttt{data}) 
+    \item Al escribir software que optimiza, lo deseable es que permita al usuario mantener algunos parámetros fijos.
+  \end{itemize}
+  
+  \subsubsection{Maximizando una verosimilitud Normal}
+  Escribamos una finción "cosntructor"
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{make.NegLogLik} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{data}\hlstd{,} \hlkwc{fixed}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{FALSE}\hlstd{)) \{}
+    \hlstd{params} \hlkwb{<-} \hlstd{fixed}
+    \hlkwa{function}\hlstd{(}\hlkwc{p}\hlstd{) \{}
+      \hlstd{params[}\hlopt{!}\hlstd{fixed]} \hlkwb{<-} \hlstd{p}
+      \hlstd{mu} \hlkwb{<-} \hlstd{params[}\hlnum{1}\hlstd{]}
+      \hlstd{sigma} \hlkwb{<-} \hlstd{params[}\hlnum{2}\hlstd{]}
+      \hlstd{a} \hlkwb{<-} \hlopt{-}\hlnum{0.5} \hlopt{*} \hlkwd{length}\hlstd{(data)} \hlopt{*} \hlkwd{log}\hlstd{(}\hlnum{2} \hlopt{*} \hlstd{pi} \hlopt{*} \hlstd{sigma}\hlopt{^}\hlnum{2}\hlstd{)}
+      \hlstd{b} \hlkwb{<-} \hlopt{-}\hlnum{0.5} \hlopt{*} \hlkwd{sum}\hlstd{((data} \hlopt{-} \hlstd{mu)}\hlopt{^}\hlnum{2}\hlstd{)} \hlopt{/} \hlstd{(sigma}\hlopt{^}\hlnum{2}\hlstd{)}
+      \hlopt{-} \hlstd{(a} \hlopt{+} \hlstd{b)}
+    \hlstd{\}}
+  \hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  \textbf{\emph{Nota:}} Las funciones de optimización en \texttt{R} minimizan funciones, por ende se necesita usar el valor negativo de la log-verosimilitud.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{set.seed}\hlstd{(}\hlnum{1}\hlstd{); normals} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{100}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{)}
+  \hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals)}
+  \hlstd{nLL}
+\end{alltt}
+\begin{verbatim}
+function(p) {
+      params[!fixed] <- p
+      mu <- params[1]
+      sigma <- params[2]
+      a <- -0.5 * length(data) * log(2 * pi * sigma^2)
+      b <- -0.5 * sum((data - mu)^2) / (sigma^2) 
+      - (a + b)
+    }
+<environment: 0x7fb6da715f50>
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{ls}\hlstd{(}\hlkwd{environment}\hlstd{(nLL))}
+\end{alltt}
+\begin{verbatim}
+[1] "data"   "fixed"  "params"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Estimación de parámetros}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlkwd{optim}\hlstd{(}\hlkwd{c}\hlstd{(}\hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{sigma} \hlstd{=} \hlnum{1}\hlstd{), nLL)}\hlopt{$}\hlstd{par}
+\end{alltt}
+\begin{verbatim}
+      mu    sigma 
+1.218239 1.787343 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+  Fijando $\sigma = 2$
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals,} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{2}\hlstd{))}
+  \hlkwd{optimize}\hlstd{(nLL,} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{))}\hlopt{$}\hlstd{minimum}
+\end{alltt}
+\begin{verbatim}
+[1] 1.217775
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  Fijando $\mu = 1$
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals,} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{FALSE}\hlstd{))}
+  \hlkwd{optimize}\hlstd{(nLL,} \hlkwd{c}\hlstd{(}\hlnum{1e-6}\hlstd{,} \hlnum{10}\hlstd{))}\hlopt{$}\hlstd{minimum}
+\end{alltt}
+\begin{verbatim}
+[1] 1.800596
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \subsection{Dibujando la verosimilitud}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals,} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{FALSE}\hlstd{))}
+\hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1.7}\hlstd{,} \hlnum{1.9}\hlstd{,} \hlkwc{len} \hlstd{=} \hlnum{100}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlkwd{sapply}\hlstd{(x, nLL)}
+\hlkwd{plot}\hlstd{(x,} \hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{(y} \hlopt{-} \hlkwd{min}\hlstd{(y))),} \hlkwc{type} \hlstd{=} \hlstr{'l'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{nLL} \hlkwb{<-} \hlkwd{make.NegLogLik}\hlstd{(normals,} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{2}\hlstd{))}
+\hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{1.5}\hlstd{,} \hlkwc{len} \hlstd{=} \hlnum{100}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlkwd{sapply}\hlstd{(x, nLL)}
+\hlkwd{plot}\hlstd{(x,} \hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{(y} \hlopt{-} \hlkwd{min}\hlstd{(y))),} \hlkwc{type} \hlstd{=} \hlstr{'l'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-2} 
+
+\end{knitrout}
+    
+  \subsection{Resumen de ámbito léxico}
+  \begin{itemize}
+    \item Las funciones objetivo pueden ser "construidas", para que contengan todos los datos necesarios para evaluar la función
+    \item No hay necesidad de llevar a todas partes largas listas de argumentos - útil para el trabajo interactivo y exploratorio.
+    \item El código puede simplificarse y limpiarse
+    \item Referencia: Robert Gentleman and Ross Ihaka (2000). “Lexical Scope and Statistical Computing,” \emph{JCGS}, 9, 491–508.
+  \end{itemize}
+
+\section{Normas de codificación en \texttt{R}}
+\begin{enumerate}
+  \item Siempre usar archivos de texto / editor de texto.
+  \item Tabular el código
+  \item Limitar el ancho del código(¿80 columnas?)
+  \item Limitar la longitud de funciones individuales
+\end{enumerate}
+
+\section{Fechas y horas en \texttt{R}}
+\texttt{R} ha desarrollado una representación especial de fechas y horas:
+\begin{itemize}
+  \item Las fechas se representan mediante la clase \texttt{Date}
+  \item Las horas se representan mediante las clases \texttt{POSIXct} o \texttt{POSIXlt}
+  \item Las fechas se almacenan internamente como el número de días desde 1970-01-01
+  \item Las horas se almacenan internamente como el número de segundos desde 1970-01-01.
+\end{itemize}
+
+  \subsection{Fechas en \texttt{R}}
+  Las fechas se representan mediante la clase \texttt{Date} y puede ser obligadas a convertirse en cadenas de caracteres usando la función \texttt{as.Date()}.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(}\hlstr{"1970-01-01"}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] "1970-01-01"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{unclass}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] 0
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{unclass}\hlstd{(}\hlkwd{as.Date}\hlstd{(}\hlstr{"1970-01-02"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+[1] 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \subsection{Horas en \texttt{R}}
+  Las horas se representan usando las clases \texttt{POSIXct} o \texttt{POSIXlt}
+  \begin{itemize}
+    \item \texttt{POSIXct} es sólo  un grán número entero, al fin de cuentas. Usa una clase cuando se quiere almacenar horas en algo como un data frame.
+    \item \texttt{POSIXlt} es una lista que almacena una serie de información como el día de la semana, día del año, mes, día del mes.
+  \end{itemize}
+  
+  Existe un número de funciones genéricas que trabajan con fechas y horas:
+  \begin{itemize}
+    \item \texttt{weekdays}: genera el día de la semana
+    \item \texttt{months}: genera el nombre del mes
+    \item \texttt{quarters}: genera el número del trimestre ("Q1", "Q2", "Q3" o "Q4")
+  
+  Las horas pueden ser obligadas a convertirse en una cadena de caracteres usando las funciones \texttt{as.POSIXct} o \texttt{as.POSIXlt}
+  
+  \end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] "2015-12-22 18:39:54 COT"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{p} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(x)}
+  \hlkwd{names}\hlstd{(}\hlkwd{unclass}\hlstd{(p))}
+\end{alltt}
+\begin{verbatim}
+ [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"  
+ [7] "wday"   "yday"   "isdst"  "zone"   "gmtoff"
+\end{verbatim}
+\begin{alltt}
+  \hlstd{p}\hlopt{$}\hlstd{sec}
+\end{alltt}
+\begin{verbatim}
+[1] 54.18555
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  También es posible usar el formato \texttt{POSIXct}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+  \hlstd{x} \hlcom{## Ya en formato 'POSIXct'}
+\end{alltt}
+\begin{verbatim}
+[1] "2015-12-22 18:39:54 COT"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{unclass}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] 1450827594
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x}\hlopt{$}\hlstd{sec}
+  \hlstd{p} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(x)}
+  \hlstd{p}\hlopt{$}\hlstd{sec}
+\end{alltt}
+\begin{verbatim}
+[1] 54.22062
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  Finalmente, existe una función \texttt{strptime} en caso de que sus fechas estén escritas en diferente formato
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{datestring} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"January 10, 2012 10:40"}\hlstd{,} \hlstr{"December 9, 2011 9:10"}\hlstd{)}
+  \hlstd{x} \hlkwb{<-} \hlkwd{strptime}\hlstd{(datestring,} \hlstr{"%B %d, %Y %H: %M"}\hlstd{)}
+  \hlstd{x}
+\end{alltt}
+\begin{verbatim}
+[1] "2012-01-10 10:40:00 COT" "2011-12-09 09:10:00 COT"
+\end{verbatim}
+\begin{alltt}
+  \hlkwd{class}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+[1] "POSIXlt" "POSIXt" 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  Es posible no recordar el formato de las cadenas. Revise \texttt{?strptime} para más detalles.
+  
+  \subsection{Operaciones con fechas y horas}
+  Es posible usar operaciones matemáticas con fechas y horas. Realmente, sólo sumar y restar. También es posible hacer comparaciones (ej. ==, <=)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(}\hlstr{"2012-01-01"}\hlstd{)}
+  \hlstd{y} \hlkwb{<-} \hlkwd{strptime}\hlstd{(}\hlstr{"9 Jan 2011 11:34:21"}\hlstd{,} \hlstr{"%d %b %Y %H:%M:%S"}\hlstd{)}
+  \hlstd{x}\hlopt{-}\hlstd{y}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{Warning: Incompatible methods ("{}-.Date"{}, "{}-.POSIXt"{}) for "{}-"{}}}\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(x)}
+  \hlstd{x}\hlopt{-}\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+Time difference of 356.3095 days
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(}\hlstr{"2012-03-01"}\hlstd{)}
+  \hlstd{y} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(}\hlstr{"2012-02-28"}\hlstd{)}
+  \hlstd{x}\hlopt{-}\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+Time difference of 2 days
+\end{verbatim}
+\begin{alltt}
+  \hlstd{x} \hlkwb{<-} \hlkwd{as.POSIXct}\hlstd{(}\hlstr{"2012-10-25 01:00:00"}\hlstd{)}
+  \hlstd{y} \hlkwb{<-} \hlkwd{as.POSIXct}\hlstd{(}\hlstr{"2012-10-25 06:00:00"}\hlstd{,} \hlkwc{tz} \hlstd{=} \hlstr{"GMT"}\hlstd{)}
+  \hlstd{y}\hlopt{-}\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+Time difference of 0 secs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 \end{document}
+  

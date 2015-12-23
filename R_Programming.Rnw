@@ -992,7 +992,177 @@ Los argumentos de las funciones también pueden ser parcialmente coincidentes, l
       \item En \texttt{S-PLUS}, las variables libres siempre miran hacia el espacio de trabajo global, por lo que todo se puede almacenar en el disco debido a que el "entorno de la definición" de todas las funciones es el mismo.
     \end{itemize}
 
+  \subsection{Aplicación: Optimización}
+  ¿Por qué es útil esta información?
+  \begin{itemize}
+    \item Las rutinas de optimización en \texttt{R} como \texttt{optim}, \texttt{nlm} y \texttt{optimize} requiere pasar a una función cuyo argumento sea un vector de parámetros (ej. log-verosimilitud)
+    \item Sin embargo, una función objeto puede depender de una serie de variables distintas a sus parámetros (como \texttt{data}) 
+    \item Al escribir software que optimiza, lo deseable es que permita al usuario mantener algunos parámetros fijos.
+  \end{itemize}
+  
+  \subsubsection{Maximizando una verosimilitud Normal}
+  Escribamos una finción "cosntructor"
+    <<comment = NA>>=
+      make.NegLogLik <- function(data, fixed=c(FALSE, FALSE)) {
+        params <- fixed
+        function(p) {
+          params[!fixed] <- p
+          mu <- params[1]
+          sigma <- params[2]
+          a <- -0.5 * length(data) * log(2 * pi * sigma^2)
+          b <- -0.5 * sum((data - mu)^2) / (sigma^2) 
+          - (a + b)
+        }
+      }  
+    @
+  \textbf{\emph{Nota:}} Las funciones de optimización en \texttt{R} minimizan funciones, por ende se necesita usar el valor negativo de la log-verosimilitud.
+    <<comment = NA>>=
+      set.seed(1); normals <- rnorm(100, 1, 2)
+      nLL <- make.NegLogLik(normals)
+      nLL
+      
+      ls(environment(nLL))  
+    @
+
+  \subsection{Estimación de parámetros}
+    <<comment = NA>>=
+      optim(c(mu = 0, sigma = 1), nLL)$par  
+    @  
+  
+  Fijando $\sigma = 2$
+    <<comment = NA>>=
+      nLL <- make.NegLogLik(normals, c(FALSE, 2))
+      optimize(nLL, c(-1, 3))$minimum
+    @
+
+  Fijando $\mu = 1$
+    <<comment = NA>>=
+      nLL <- make.NegLogLik(normals, c(1, FALSE))
+      optimize(nLL, c(1e-6, 10))$minimum
+    @
+  \subsection{Dibujando la verosimilitud}
+      <<comment = NA>>=
+      nLL <- make.NegLogLik(normals, c(1, FALSE))
+      x <- seq(1.7, 1.9, len = 100)
+      y <- sapply(x, nLL)
+      plot(x, exp(-(y - min(y))), type = 'l')
+      
+      nLL <- make.NegLogLik(normals, c(FALSE, 2))
+      x <- seq(0.5, 1.5, len = 100)
+      y <- sapply(x, nLL)
+      plot(x, exp(-(y - min(y))), type = 'l')
+    @
+    
+  \subsection{Resumen de ámbito léxico}
+  \begin{itemize}
+    \item Las funciones objetivo pueden ser "construidas", para que contengan todos los datos necesarios para evaluar la función
+    \item No hay necesidad de llevar a todas partes largas listas de argumentos - útil para el trabajo interactivo y exploratorio.
+    \item El código puede simplificarse y limpiarse
+    \item Referencia: Robert Gentleman and Ross Ihaka (2000). “Lexical Scope and Statistical Computing,” \emph{JCGS}, 9, 491–508.
+  \end{itemize}
+
+\section{Normas de codificación en \texttt{R}}
+\begin{enumerate}
+  \item Siempre usar archivos de texto / editor de texto.
+  \item Tabular el código
+  \item Limitar el ancho del código(¿80 columnas?)
+  \item Limitar la longitud de funciones individuales
+\end{enumerate}
+
+\section{Fechas y horas en \texttt{R}}
+\texttt{R} ha desarrollado una representación especial de fechas y horas:
+\begin{itemize}
+  \item Las fechas se representan mediante la clase \texttt{Date}
+  \item Las horas se representan mediante las clases \texttt{POSIXct} o \texttt{POSIXlt}
+  \item Las fechas se almacenan internamente como el número de días desde 1970-01-01
+  \item Las horas se almacenan internamente como el número de segundos desde 1970-01-01.
+\end{itemize}
+
+  \subsection{Fechas en \texttt{R}}
+  Las fechas se representan mediante la clase \texttt{Date} y puede ser obligadas a convertirse en cadenas de caracteres usando la función \texttt{as.Date()}.
+  <<comment = NA>>=
+    x <- as.Date("1970-01-01")
+    x
+    unclass(x)
+    unclass(as.Date("1970-01-02"))
+  @
+
+  \subsection{Horas en \texttt{R}}
+  Las horas se representan usando las clases \texttt{POSIXct} o \texttt{POSIXlt}
+  \begin{itemize}
+    \item \texttt{POSIXct} es sólo  un grán número entero, al fin de cuentas. Usa una clase cuando se quiere almacenar horas en algo como un data frame.
+    \item \texttt{POSIXlt} es una lista que almacena una serie de información como el día de la semana, día del año, mes, día del mes.
+  \end{itemize}
+  
+  Existe un número de funciones genéricas que trabajan con fechas y horas:
+  \begin{itemize}
+    \item \texttt{weekdays}: genera el día de la semana
+    \item \texttt{months}: genera el nombre del mes
+    \item \texttt{quarters}: genera el número del trimestre ("Q1", "Q2", "Q3" o "Q4")
+  
+  Las horas pueden ser obligadas a convertirse en una cadena de caracteres usando las funciones \texttt{as.POSIXct} o \texttt{as.POSIXlt}
+  
+  \end{itemize}
+  <<comment = NA>>=
+    x <- Sys.time()
+    x
+    p <- as.POSIXlt(x)
+    names(unclass(p))
+    p$sec
+  @
+
+  También es posible usar el formato \texttt{POSIXct}
+  <<comment = NA>>=
+    x <- Sys.time()
+    x ## Ya en formato 'POSIXct'
+    unclass(x)
+    x$sec
+    p <- as.POSIXlt(x)
+    p$sec
+  @
+
+  Finalmente, existe una función \texttt{strptime} en caso de que sus fechas estén escritas en diferente formato
+  <<comment = NA>>=
+    datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
+    x <- strptime(datestring, "%B %d, %Y %H: %M")
+    x
+    class(x)
+  @  
+  Es posible no recordar el formato de las cadenas. Revise \texttt{?strptime} para más detalles.
+  
+  \subsection{Operaciones con fechas y horas}
+  Es posible usar operaciones matemáticas con fechas y horas. Realmente, sólo sumar y restar. También es posible hacer comparaciones (ej. ==, <=)
+  <<comment = NA>>=
+    x <- as.Date("2012-01-01")
+    y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S") 
+    x-y
+    x <- as.POSIXlt(x) 
+    x-y
+  @
+
+  Incluso un seguimiento de los años bisiestos, segundos bisiestos, el horario de verano y zonas horarias
+  <<comment = NA>>=
+    x <- as.Date("2012-03-01") 
+    y <- as.Date("2012-02-28") 
+    x-y
+    x <- as.POSIXct("2012-10-25 01:00:00")
+    y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT") 
+    y-x
+  @
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 \end{document}
+  

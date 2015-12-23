@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.5)  20 DEC 2015 23:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.5)  22 DEC 2015 18:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -416,246 +416,296 @@ Package color Info: Redefining color shadecolor on input line 78.
  [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package color Info: Redefining color shadecolor on input line 108.
-Package color Info: Redefining color shadecolor on input line 124.
-Package color Info: Redefining color shadecolor on input line 138.
-Package color Info: Redefining color shadecolor on input line 152.
-Package color Info: Redefining color shadecolor on input line 164.
+Package color Info: Redefining color shadecolor on input line 109.
+Package color Info: Redefining color shadecolor on input line 125.
+Package color Info: Redefining color shadecolor on input line 139.
+Package color Info: Redefining color shadecolor on input line 153.
+Package color Info: Redefining color shadecolor on input line 165.
  [2]
-Package color Info: Redefining color shadecolor on input line 195.
-Package color Info: Redefining color shadecolor on input line 231.
+Package color Info: Redefining color shadecolor on input line 196.
+Package color Info: Redefining color shadecolor on input line 232.
  [3]
-Package color Info: Redefining color shadecolor on input line 255.
-Package color Info: Redefining color shadecolor on input line 283.
-Package color Info: Redefining color shadecolor on input line 298.
+Package color Info: Redefining color shadecolor on input line 256.
+Package color Info: Redefining color shadecolor on input line 284.
+Package color Info: Redefining color shadecolor on input line 299.
  [4]
-Package color Info: Redefining color shadecolor on input line 320.
-Package color Info: Redefining color shadecolor on input line 350.
+Package color Info: Redefining color shadecolor on input line 321.
+Package color Info: Redefining color shadecolor on input line 351.
  [5]
-Package color Info: Redefining color shadecolor on input line 380.
-Package color Info: Redefining color shadecolor on input line 402.
+Package color Info: Redefining color shadecolor on input line 381.
+Package color Info: Redefining color shadecolor on input line 403.
 
 [6]
-Overfull \hbox (4.5271pt too wide) in paragraph at lines 440--441
+Overfull \hbox (4.5271pt too wide) in paragraph at lines 441--442
 []\OT1/cmr/m/n/10 Los data frames se crean usual-mente me-di-ante \OT1/cmtt/m/n
 /10 read.table() \OT1/cmr/m/n/10 o \OT1/cmtt/m/n/10 read.csv() 
  []
 
-Package color Info: Redefining color shadecolor on input line 445.
-Package color Info: Redefining color shadecolor on input line 475.
+Package color Info: Redefining color shadecolor on input line 446.
+Package color Info: Redefining color shadecolor on input line 476.
 [7]
-Package color Info: Redefining color shadecolor on input line 502.
-Package color Info: Redefining color shadecolor on input line 522.
+Package color Info: Redefining color shadecolor on input line 503.
+Package color Info: Redefining color shadecolor on input line 523.
  [8]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 546.
-Package color Info: Redefining color shadecolor on input line 564.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 547.
+Package color Info: Redefining color shadecolor on input line 565.
  [9]
-Package color Info: Redefining color shadecolor on input line 586.
+Package color Info: Redefining color shadecolor on input line 587.
 
-Overfull \hbox (122.24593pt too wide) in paragraph at lines 595--595
+Overfull \hbox (122.24593pt too wide) in paragraph at lines 596--596
 []\OT1/cmtt/m/n/10 structure(list(a = 1, b = structure(1L, .Label = "a", class 
 = "factor")), .Names = c("a",[] 
  []
 
-Package color Info: Redefining color shadecolor on input line 609.
+Package color Info: Redefining color shadecolor on input line 610.
 [10]
-Package color Info: Redefining color shadecolor on input line 633.
-Package color Info: Redefining color shadecolor on input line 657.
+Package color Info: Redefining color shadecolor on input line 634.
+Package color Info: Redefining color shadecolor on input line 658.
 
-Overfull \hbox (6.25058pt too wide) in paragraph at lines 655--657
+Overfull \hbox (6.25058pt too wide) in paragraph at lines 656--658
 \OT1/cmr/m/n/10 En gen-eral, las conex-iones son her-ramien-tas poderosas para 
 nave-gar en-tre archivos
  []
 
-Package color Info: Redefining color shadecolor on input line 668.
-Package color Info: Redefining color shadecolor on input line 677.
-Package color Info: Redefining color shadecolor on input line 688.
+Package color Info: Redefining color shadecolor on input line 669.
+Package color Info: Redefining color shadecolor on input line 678.
+Package color Info: Redefining color shadecolor on input line 689.
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 702--702
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 703--703
 []\OT1/cmtt/m/n/10 [6] "<title>Johns Hopkins Bloomberg School of Public Health<
 /title>"[] 
  []
 
 [11]
-Package color Info: Redefining color shadecolor on input line 715.
-Package color Info: Redefining color shadecolor on input line 759.
+Package color Info: Redefining color shadecolor on input line 716.
+Package color Info: Redefining color shadecolor on input line 760.
  [12]
-Package color Info: Redefining color shadecolor on input line 797.
-Package color Info: Redefining color shadecolor on input line 814.
+Package color Info: Redefining color shadecolor on input line 798.
+Package color Info: Redefining color shadecolor on input line 815.
  [13]
-Package color Info: Redefining color shadecolor on input line 840.
-Package color Info: Redefining color shadecolor on input line 866.
-Package color Info: Redefining color shadecolor on input line 885.
-Package color Info: Redefining color shadecolor on input line 903.
+Package color Info: Redefining color shadecolor on input line 841.
+Package color Info: Redefining color shadecolor on input line 867.
+Package color Info: Redefining color shadecolor on input line 886.
+Package color Info: Redefining color shadecolor on input line 904.
  [14]
-Package color Info: Redefining color shadecolor on input line 923.
-Package color Info: Redefining color shadecolor on input line 949.
-Package color Info: Redefining color shadecolor on input line 975.
-Package color Info: Redefining color shadecolor on input line 989.
+Package color Info: Redefining color shadecolor on input line 924.
+Package color Info: Redefining color shadecolor on input line 950.
+Package color Info: Redefining color shadecolor on input line 976.
+Package color Info: Redefining color shadecolor on input line 990.
  [15]
-Package color Info: Redefining color shadecolor on input line 1015.
-Package color Info: Redefining color shadecolor on input line 1047.
+Package color Info: Redefining color shadecolor on input line 1016.
+Package color Info: Redefining color shadecolor on input line 1048.
  [16]
-Package color Info: Redefining color shadecolor on input line 1089.
+Package color Info: Redefining color shadecolor on input line 1090.
  [17]
-Package color Info: Redefining color shadecolor on input line 1133.
+Package color Info: Redefining color shadecolor on input line 1134.
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 113
-5.
+6.
 
 (/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/omscmtt.fd
 File: omscmtt.fd 
 )
 LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1135.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1136.
 
-Package color Info: Redefining color shadecolor on input line 1154.
+Package color Info: Redefining color shadecolor on input line 1155.
 
-Overfull \hbox (6.497pt too wide) in paragraph at lines 1164--1164
+Overfull \hbox (6.497pt too wide) in paragraph at lines 1165--1165
 []\OT1/cmtt/m/n/10 Warning in if (x > 3) \OMS/cmsy/m/n/10 f\OT1/cmtt/m/n/10 : t
 he condition has length > 1 and only the
  []
 
-Package color Info: Redefining color shadecolor on input line 1170.
+Package color Info: Redefining color shadecolor on input line 1171.
 [18]
-Overfull \hbox (6.497pt too wide) in paragraph at lines 1180--1180
+Overfull \hbox (6.497pt too wide) in paragraph at lines 1181--1181
 []\OT1/cmtt/m/n/10 Warning in if (x > 3) \OMS/cmsy/m/n/10 f\OT1/cmtt/m/n/10 : t
 he condition has length > 1 and only the
  []
 
-Package color Info: Redefining color shadecolor on input line 1185.
-Package color Info: Redefining color shadecolor on input line 1200.
+Package color Info: Redefining color shadecolor on input line 1186.
+Package color Info: Redefining color shadecolor on input line 1201.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 1220.
+(Font)              <7> on input line 1221.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 1220.
-Package color Info: Redefining color shadecolor on input line 1224.
+(Font)              <5> on input line 1221.
+Package color Info: Redefining color shadecolor on input line 1225.
 [19]
-Package color Info: Redefining color shadecolor on input line 1274.
+Package color Info: Redefining color shadecolor on input line 1275.
  [20]
-Package color Info: Redefining color shadecolor on input line 1298.
-Package color Info: Redefining color shadecolor on input line 1324.
+Package color Info: Redefining color shadecolor on input line 1299.
+Package color Info: Redefining color shadecolor on input line 1325.
  [21]
-Package color Info: Redefining color shadecolor on input line 1346.
-Package color Info: Redefining color shadecolor on input line 1366.
+Package color Info: Redefining color shadecolor on input line 1347.
+Package color Info: Redefining color shadecolor on input line 1367.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1387.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1388.
 
  [22]
-Underfull \hbox (badness 10000) in paragraph at lines 1390--1391
+Underfull \hbox (badness 10000) in paragraph at lines 1391--1392
 
  []
 
-Package color Info: Redefining color shadecolor on input line 1394.
-Package color Info: Redefining color shadecolor on input line 1405.
-Package color Info: Redefining color shadecolor on input line 1417.
-Package color Info: Redefining color shadecolor on input line 1429.
+Package color Info: Redefining color shadecolor on input line 1395.
+Package color Info: Redefining color shadecolor on input line 1406.
+Package color Info: Redefining color shadecolor on input line 1418.
+Package color Info: Redefining color shadecolor on input line 1430.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1445--1446
+Underfull \hbox (badness 10000) in paragraph at lines 1446--1447
 
  []
 
-Package color Info: Redefining color shadecolor on input line 1449.
-Package color Info: Redefining color shadecolor on input line 1460.
+Package color Info: Redefining color shadecolor on input line 1450.
+Package color Info: Redefining color shadecolor on input line 1461.
 [23]
-Package color Info: Redefining color shadecolor on input line 1472.
-Package color Info: Redefining color shadecolor on input line 1484.
-Package color Info: Redefining color shadecolor on input line 1501.
-Package color Info: Redefining color shadecolor on input line 1518.
+Package color Info: Redefining color shadecolor on input line 1473.
+Package color Info: Redefining color shadecolor on input line 1485.
+Package color Info: Redefining color shadecolor on input line 1502.
+Package color Info: Redefining color shadecolor on input line 1519.
  [24]
-Package color Info: Redefining color shadecolor on input line 1547.
-Package color Info: Redefining color shadecolor on input line 1564.
+Package color Info: Redefining color shadecolor on input line 1548.
+Package color Info: Redefining color shadecolor on input line 1565.
  [25]
-Overfull \hbox (6.74693pt too wide) in paragraph at lines 1573--1573
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 1574--1574
 []\OT1/cmtt/m/n/10 function (formula, data, subset, weights, na.action, method 
 = "qr",[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 1573--1573
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 1574--1574
 []    \OT1/cmtt/m/n/10 model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.
 ok = TRUE,[] 
  []
 
-Package color Info: Redefining color shadecolor on input line 1590.
-Package color Info: Redefining color shadecolor on input line 1607.
+Package color Info: Redefining color shadecolor on input line 1591.
+Package color Info: Redefining color shadecolor on input line 1608.
 
-Overfull \hbox (6.74693pt too wide) in paragraph at lines 1616--1616
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 1617--1617
 []\OT1/cmtt/m/n/10 function (formula, data, subset, weights, na.action, method 
 = "qr",[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 1616--1616
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 1617--1617
 []    \OT1/cmtt/m/n/10 model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.
 ok = TRUE,[] 
  []
 
 [26]
-Package color Info: Redefining color shadecolor on input line 1622.
-Package color Info: Redefining color shadecolor on input line 1645.
-Package color Info: Redefining color shadecolor on input line 1657.
+Package color Info: Redefining color shadecolor on input line 1623.
+Package color Info: Redefining color shadecolor on input line 1646.
+Package color Info: Redefining color shadecolor on input line 1658.
 
-Overfull \hbox (1.67226pt too wide) in paragraph at lines 1655--1657
+Overfull \hbox (1.67226pt too wide) in paragraph at lines 1656--1658
 \OT1/cmr/m/n/10 Los ar-gu-men-tos para fun-ciones son eval-u-adas \OT1/cmr/m/it
 /10 pere-zosa-mente\OT1/cmr/m/n/10 , es de-cir s^^Solo cuando
  []
 
 [27]
-Package color Info: Redefining color shadecolor on input line 1671.
-Package color Info: Redefining color shadecolor on input line 1690.
-Package color Info: Redefining color shadecolor on input line 1700.
-Package color Info: Redefining color shadecolor on input line 1716.
+Package color Info: Redefining color shadecolor on input line 1672.
+Package color Info: Redefining color shadecolor on input line 1691.
+Package color Info: Redefining color shadecolor on input line 1701.
+Package color Info: Redefining color shadecolor on input line 1717.
  [28]
-Package color Info: Redefining color shadecolor on input line 1738.
-Package color Info: Redefining color shadecolor on input line 1766.
+Package color Info: Redefining color shadecolor on input line 1739.
+Package color Info: Redefining color shadecolor on input line 1767.
  [29]
-Package color Info: Redefining color shadecolor on input line 1787.
+Package color Info: Redefining color shadecolor on input line 1788.
  [30]
-Overfull \hbox (3.08392pt too wide) in paragraph at lines 1816--1817
+Overfull \hbox (3.08392pt too wide) in paragraph at lines 1817--1818
 []\OT1/cmr/m/n/10 El ^^Sambito l^^Sexico re-sulta ser par-tic-u-lar-mente ^^Sut
 il para sim-pli-ficar los c^^Salculos
  []
 
-Package color Info: Redefining color shadecolor on input line 1822.
+Package color Info: Redefining color shadecolor on input line 1823.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1831--1831
+Underfull \hbox (badness 10000) in paragraph at lines 1832--1832
 
  []
 
 [31]
-Package color Info: Redefining color shadecolor on input line 1859.
-Package color Info: Redefining color shadecolor on input line 1872.
-Package color Info: Redefining color shadecolor on input line 1893.
-Package color Info: Redefining color shadecolor on input line 1923.
+Package color Info: Redefining color shadecolor on input line 1860.
+Package color Info: Redefining color shadecolor on input line 1873.
+Package color Info: Redefining color shadecolor on input line 1894.
+Package color Info: Redefining color shadecolor on input line 1924.
  [32]
-Package color Info: Redefining color shadecolor on input line 1941.
-Package color Info: Redefining color shadecolor on input line 1962.
- [33] [34] (./R_Programming.aux) ) 
+Package color Info: Redefining color shadecolor on input line 1942.
+Package color Info: Redefining color shadecolor on input line 1963.
+ [33]
+Package color Info: Redefining color shadecolor on input line 2011.
+ [34]
+Package color Info: Redefining color shadecolor on input line 2029.
+Package color Info: Redefining color shadecolor on input line 2057.
+Package color Info: Redefining color shadecolor on input line 2070.
+Package color Info: Redefining color shadecolor on input line 2083.
+Package color Info: Redefining color shadecolor on input line 2095.
+ [35]
+<figure/unnamed-chunk-93-1.pdf, id=125, 505.89pt x 505.89pt>
+File: figure/unnamed-chunk-93-1.pdf Graphic file (type pdf)
+
+<use figure/unnamed-chunk-93-1.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-93-1.pdf used on input line 2103.
+
+(pdftex.def)             Requested size: 345.0pt x 345.00414pt.
+
+Overfull \hbox (15.0pt too wide) in paragraph at lines 2103--2104
+[][] 
+ []
+
+<figure/unnamed-chunk-93-2.pdf, id=126, 505.89pt x 505.89pt>
+File: figure/unnamed-chunk-93-2.pdf Graphic file (type pdf)
+
+<use figure/unnamed-chunk-93-2.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-93-2.pdf used on input line 2111.
+
+(pdftex.def)             Requested size: 345.0pt x 345.00414pt.
+
+Overfull \hbox (15.0pt too wide) in paragraph at lines 2111--2112
+[][] 
+ []
+
+[36 <./figure/unnamed-chunk-93-1.pdf>] [37 <./figure/unnamed-chunk-93-2.pdf>]
+Package color Info: Redefining color shadecolor on input line 2143.
+
+[38]
+Package color Info: Redefining color shadecolor on input line 2183.
+Package color Info: Redefining color shadecolor on input line 2210.
+Package color Info: Redefining color shadecolor on input line 2237.
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 2239--2239
+[]  []\OT1/cmtt/m/n/10 datestring[] []<-[] []c[][]([][]"January 10, 2012 10:40"
+[][],[] []"December 9, 2011 9:10"[][])[][] 
+ []
+
+[39]
+Package color Info: Redefining color shadecolor on input line 2259.
+Package color Info: Redefining color shadecolor on input line 2279.
+ [40] (./R_Programming.aux) ) 
 Here is how much of TeX's memory you used:
- 1902 strings out of 493054
- 26594 string characters out of 6134760
+ 1916 strings out of 493054
+ 26943 string characters out of 6134760
  92517 words of memory out of 5000000
- 5394 multiletter control sequences out of 15000+600000
- 8915 words of font info for 33 fonts, out of 8000000 for 9000
+ 5403 multiletter control sequences out of 15000+600000
+ 9274 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,7n,23p,445b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmtt12.pfb>
-Output written on R_Programming.pdf (34 pages, 193216 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmtt12.pfb>
+Output written on R_Programming.pdf (40 pages, 223075 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 195 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
